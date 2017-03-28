@@ -1,0 +1,43 @@
+<div class="modal-over" style="background:url(img/bgx.gif) center center; background-repeat:repeat;">
+    <div class="container m-t-lg w-xxl w-auto-xs" ng-controller="SignupFormController" ng-init="app.settings.container = false;">
+        <div class="m-t-lg h1 text-center">学生注册</div>
+        <div class="m-b-lg m-t-lg">
+            <form name="form" class="form-validation">
+                <div class="text-danger wrapper text-center" ng-show="authError">
+                    {{authError}}
+                </div>
+                <div class="list-group list-group-lg">
+                    <div class="input-group m-b-md">
+                        <span class="input-group-addon input-lg"><i class="fa fa-user"></i></span>
+                        <input type="text" placeholder="请输入学号" class="form-control input-lg" required>
+                    </div>
+                    <div class="input-group m-b-md">
+                        <span class="input-group-addon input-lg"><i class="fa fa-university"></i></span>
+                        <input type="email" placeholder="请输入院校" class="form-control input-lg" ng-model="user.email" required>
+                    </div>
+                    <div class="input-group m-b-md">
+                        <span class="input-group-addon input-lg"><i class="fa fa-mortar-board"></i></span>
+                        <input type="text" placeholder="请输入专业" class="form-control input-lg" required>
+                    </div>
+                    <div class="input-group m-b-md">
+                        <span class="input-group-addon input-lg"><i class="fa fa-trophy"></i></span>
+                        <input type="text" placeholder="请输入班级" class="form-control input-lg" required>
+                    </div>
+                </div>
+                <div class="checkbox m-b-md m-t-none">
+                    <label class="checkbox">
+                        <input type="checkbox" checked required><i></i> 同意 <a href>《电工电子实验规范》</a>
+                    </label>
+                </div>
+                <button type="submit" class="btn btn-lg btn-primary btn-block" ng-click="isCollapsed = !isCollapsed" ng-disabled="form.$invalid">注册</button>
+            </form>
+            <div collapse="!isCollapsed" class="text-center m-t">
+                <div class="clear alert alert-success">
+                    注册成功！<br>账号激活邮件已发送到您的邮箱！<br>请在及时登陆邮箱激活账号！</p>
+                    <div class="btn btn-sm btn-success" ui-sref="access.signin">返回登陆</div>
+                </div>
+            </div>
+        </div>
+        <div class="text-center" ng-include="'tpl/blocks/page_footer.html'"></div>
+    </div>
+</div>

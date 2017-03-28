@@ -1,0 +1,159 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.system.mapping.UserDao">
+	<resultMap type="user" id="user1">
+		<result column="id" property="id" />
+		<result column="username" property="userName" jdbcType="VARCHAR"
+			javaType="String" />
+		<result column="password" property="password" jdbcType="VARCHAR"
+			javaType="String" />
+		<result column="state" property="state"/>
+		<result column="sex" property="sex"  />
+		<result column="phone" property="phone" jdbcType="VARCHAR"
+			javaType="String" />
+		<result column="email" property="email" jdbcType="VARCHAR"
+			javaType="String" />
+		<result column="status" property="status"/>
+		<result column="ts" property="ts" jdbcType="TIMESTAMP"
+			javaType="java.util.Date" />
+		<result column="birthday" property="birthday" />
+		<result column="address" property="address" />	
+		
+	</resultMap>
+	<insert id="addUser" parameterType="user">
+		insert into tb_user (
+		status,state
+		<if test="code!=null">, code</if>
+		<if test="password!=null">, password</if>
+		<if test="userName!=null">,username</if>
+		<if test="sex!=null">,sex</if>
+		<if test="phone!=null">, phone</if>
+		<if test="email!=null">, email</if>
+		<if test="address!=null">, address</if>
+		<if test="note!=null">, note</if>
+		<if test="birthday!=null">, birthday</if>
+		)
+		values
+		(
+		1,1
+		<if test="code!=null">, #{code}</if>
+		<if test="password!=null"> ,#{password}</if>
+		<if test="userName!=null">,#{userName}</if>
+		<if test="sex!=null">,#{sex}</if>
+		<if test="phone!=null">, #{phone}</if>
+		<if test="email!=null">, #{email}</if>
+		<if test="address!=null">, #{address}</if>
+		<if test="note!=null">, #{note}</if>
+		<if test="birthday!=null">, #{birthday}</if>
+		)
+	</insert>
+	<select id="getUserList" resultMap="user1" parameterType="user">
+		select * from tb_user
+	</select>
+	<update id="updataUser" parameterType="user">
+		update tb_user
+		<set>
+			status=1
+			<if test="code!=null">,code=#{code}</if>
+			<if test="password!=null"> ,password=#{password}</if>
+			<if test="userName!=null">,userName=#{userName}</if>
+			<if test="sex!=null">,sex=#{sex}</if>
+			<if test="phone!=null">, phone=#{phone}</if>
+			<if test="email!=null">, email=#{email}</if>
+			<if test="address!=null">, address=#{address}</if>
+			<if test="note!=null">, note=#{note}</if>
+			<if test="birthday!=null">, birthday=#{birthday}</if>
+		</set>
+		where id=#{id}
+	</update>
+	<update id="deleteById" parameterType="long">
+		update tb_user set status
+		= 0 where id=#{id}
+	</update>
+	<select id="findUser" resultMap="user1" parameterType="user">
+		select * from tb_user
+		<where>
+			status = 1
+			<if test="id!=null">and id=#{id}</if>
+			<if test="code!=null">and code=#{code}</if>
+			<if test="password!=null">and password=#{password}</if>
+			<if test="userName!=null">and username=#{userName}</if>
+			<if test="sex!=null">and sex=#{sex}</if> 
+			<if test="phone!=null">and phone=#{phone}</if> 
+			<if test="email!=null">and email=#{email}</if> 
+		</where>
+	</select>
+	<select id="findUsers" resultMap="user1" parameterType="user">
+		<if test="userName!=null">
+			<bind name="userName" value="'%' + userName + '%'" />
+		</if>
+		
+		<if test="phone!=null">
+			<bind name="phone" value="'%' + phone + '%'" />
+		</if>
+		select
+		id,username,password,birthday,address,state,
+		sex,phone,email,ts,note,code,status
+		from tb_user where status = 1
+		<if test="userName!=null">
+			and username like #{userName}
+		</if>
+		<if test="phone!=null">
+			and phone like #{phone}
+		</if>
+		<if test="sex!=0">and sex=#{sex}</if>
+	</select>
+	
+	
+	<!-- 
+	
+	<select id="getUserList" resultMap="user1" parameterType="page">
+		select
+		id,username,password,role_id,birthday,address,name,state,
+		sex,phone,email,ts,lock_time,create_time,lock_num,note,auth_district
+		from tb_user where status = 1
+		<if test="userName!=null">
+			and username like #{userName}
+		</if>
+		<if test="name!=null">
+			and name like #{name}
+		</if>
+		<if test="phone!=null">
+			and phone like #{phone}
+		</if>
+		<if test="roleId!=null">and role_id=#{roleId}</if>
+		<if test="sex!=2">and sex=#{sex}</if>
+		limit #{startIndex} , #{pageSize}
+	</select>
+	<select id="getUserListSize" resultType="int" parameterType="page">
+		select
+		count(*)
+		from tb_user where status = 1
+		<if test="userName!=null">
+			and username like #{userName}
+		</if>
+		<if test="name!=null">
+			and name like #{name}
+		</if>
+		<if test="phone!=null">
+			and phone like #{phone}
+		</if>
+		<if test="roleId!=0">and role_id=#{roleId}</if>
+		<if test="sex!=2">and sex=#{sex}</if>
+		limit #{startIndex} , #{pageSize}
+	</select>
+	<select id="findUserById" resultMap="user1" parameterType="int">
+		select
+		id,username,password,role_id,birthday,address,name,state,sex,phone,email,ts,lock_time,create_time,lock_num,note,auth_district
+		from tb_user where status = 1 and id = #{id}
+	</select>
+	
+	
+	
+	
+
+	
+	
+	 -->
+</mapper> 

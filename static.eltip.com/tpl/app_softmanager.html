@@ -1,0 +1,480 @@
+<script type="text/javascript">
+    <!--
+    //-->
+    function azInfo() {
+        var $rj = $('#rj_list_info');
+        $rj.hide();
+
+        var $rj_div = $('#rj_info_div');
+        var info=document.getElementById("rj_info_div");
+        info.style.display="block";
+
+        var return_but=document.getElementById("return_but");
+        return_but.style.display="block" ;
+
+        var return_but=document.getElementById("rj_info_game");
+        return_but.style.display="none" ;
+
+        var return_but=document.getElementById("rj_info_game1");
+        return_but.style.display="block" ;
+    }
+
+    function returnClick() {
+        var $rj = $('#rj_list_info');
+        $rj.show();
+
+        var $rj_div = $('#rj_info_div');
+        var info=document.getElementById("rj_info_div");
+        info.style.display="none" ;
+
+        var return_but=document.getElementById("return_but");
+        return_but.style.display="none" ;
+
+        var return_but=document.getElementById("rj_info_game");
+        return_but.style.display="block" ;
+
+        var return_but=document.getElementById("rj_info_game1");
+        return_but.style.display="none" ;
+    }
+    function InseatClick() {
+        var return_but=document.getElementById("rj_info_game");
+        return_but.style.display="block" ;
+
+        var return_but=document.getElementById("rj_info_game1");
+        return_but.style.display="none" ;
+    }
+
+</script>
+<div class="hbox hbox-auto-xs hbox-auto-sm"
+     ng-controller="AbnTestController" style="background: white; ">
+    <div>
+        <div>
+            <div>
+                <div class="wrapper-md" >
+                    <div class="row"
+                         style="border: 1px solid rgb(214, 229, 246)">
+                        <div class="col-md-3">
+                            <tabset class="nav-tabs-alt"
+                                    justified="true"> <tab> <tab-heading
+                                    class="nav-tabs-alt"> <span>
+									软件</span> </tab-heading>
+                                <!--软件的左侧list-->
+                                <div class="list-group">
+                                    <a href class="list-group-item"> <i
+                                            class="fa fa-envelope fa-fw m-r-xs"></i>全部(201)
+                                    </a> <a href class="list-group-item"> <i
+                                        class="fa fa-eye fa-fw m-r-xs"></i> 视频(12)
+                                </a> <a href class="list-group-item"> <i
+                                        class="fa fa-chevron-right text-muted"></i> <i
+                                        class="fa fa-phone fa-fw m-r-xs"></i> 游戏(21)
+                                </a> <a href class="list-group-item"> <i
+                                        class="fa fa-comments-o fa-fw m-r-xs"></i>浏览器(31)
+                                </a> <a href class="list-group-item"> <i
+                                        class="fa fa-bookmark fa-fw m-r-xs"></i> 聊天(13)
+                                </a> <a href class="list-group-item"> <i
+                                        class="fa fa-bell fa-fw m-r-xs"></i> 下载(14)
+                                </a> <a href class="list-group-item"> <i
+                                        class="fa fa-clock-o fa-fw m-r-xs"></i> 影音(16)
+                                </a> <a href class="list-group-item"> <i
+                                        class="fa fa-eye fa-fw m-r-xs"></i> 视频(12)
+                                </a> <a href class="list-group-item"> <i
+                                        class="fa fa-comments-o fa-fw m-r-xs"></i>浏览器(31)
+                                </a> <a href class="list-group-item"> <i
+                                        class="fa fa-bookmark fa-fw m-r-xs"></i> 聊天(13)
+                                </a> <a href class="list-group-item"> <i
+                                        class="fa fa-bell fa-fw m-r-xs"></i> 下载(14)
+                                </a> <a href class="list-group-item"> <i
+                                        class="fa fa-clock-o fa-fw m-r-xs"></i> 影音(16)
+                                </a>
+                                </div>
+                            </tab>
+                                <tab>
+                                    <tab-heading><span>设备</span> </tab-heading>
+                                    <!-- 设备的树形-->
+                                    <!-- 设备的树形布局-->
+                                    <div class="wrapper-md" style="padding: 0px">
+                                        <div class="b-a bg-light dk r r-2x">
+                                            <ul tree2 id="tree" class="ztree bg-white" ng-model="selectNode"></ul>
+                                        </div>
+                                    </div>
+                                </tab>
+                            </tabset>
+                        </div>
+                        <!-- 下方右侧布局-->
+                        <div class="col-md-9" >
+                            <div class="row wrapper-sm">
+                                <div class="input-group pull-left  w-xxl">
+                                    <input class="form-control input-sm "  placeholder="请键入搜索关键词" type="text">
+                                    <span class="input-group-btn">
+                                        <button type="submit" class="btn btn-sm  rounded "><i class="fa fa-search"></i></button>
+                                    </span>
+                                </div>
+                                <button type="button" class="btn btn-default btn-addon pull-right m-t-l" ui-toggle-class="show" target="#aside">
+                                    <i class="fa fa-bars"></i>批量处理
+                                </button>
+                            </div>
+
+                            <div class="panel b-a">
+                                <div class="panel-heading b-light"  style="height:45px" >
+                                    <a   style="display:block;" id="rj_info_game" href class="font-bold " onclick="returnClick()" >游戏(21共款)</a>
+                                    <a  style="display:none;" id="rj_info_game1"  href class="font-bold pull-left" >安装详情</a>
+                                    <a class="text-info block m-b-xs pull-right"  style="display:none;"  onclick="returnClick()" id="return_but">返回<i class="icon-twitter"></i>
+                                    </a>
+
+                                </div>
+
+                                <!--点击安装详情出现的页面-->
+                                <div  style="display: none;" id="rj_info_div">
+                                    <ul class="list-group list-group-lg no-bg auto" >
+                                        <li class="list-group-item clearfix" style="height: 60px">
+                                            <span  class="pull-left thumb-sm avatar m-r">
+                                                <img src="img/a4.jpg" alt="...">
+									        </span>
+                                            <span class="clear" style="float: left; width: 240px">
+                                                <span >
+                                                    <a  class="text-info font-bold">主板<i class="icon-twitter"></i></a>
+                                                </span>
+                                                <small class="text-muted clear text-ellipsis" >360安全衛士</small>
+                                            </span>
+
+
+                                                <span class="m-l-xxl col-sm-4 " style="margin-top: 10px">
+                                                  <a   class=" text-info  ">研发部</a>
+                                                </span>
+
+
+                                              <span class="clear pull-left  m-t-sm ">
+                                                <span>
+                                                  <a href="#" class="text-info m-l-xxl">10台<i class="icon-twitter"></i></a>
+                                                </span>
+
+                                              </span>
+
+                                           <!-- <div style=" float: right;margin-top: 4px ;width: 78px">
+                                                <a href="#" class=" btn-info btn-sm padder m-b-xs" onclick="azInfo()">安装详情</a>
+                                            </div>-->
+                                        </li>
+
+                                        <li>
+
+                                            <!--<a  class="text-info " style="margin-left: 100px">电脑型号</a>
+                                            <a  class="text-info"   style="margin-left: 240px">技嘉 B85M-D2V</a><br>
+                                            <a  class="text-info " style="margin-left: 100px">操作系统</a>
+                                            <a  class="text-info"   style="margin-left: 240px">Microsoft Windows 7 旗舰版  (64位/Service Pack 1)</a><br>
+                                            <a  class="text-info " style="margin-left: 100px">CPU</a>
+                                            <a  class="text-info"   style="margin-left: 270px">(英特尔)Intel(R) Core(TM) i5-4440 CPU @ 3.10GHz(3101 MHz)</a><br>
+                                            <a  class="text-info " style="margin-left: 100px">主板</a>
+                                            <a  class="text-info"   style="margin-left: 280px">技嘉 B85M-D2V</a><br><br>-->
+                                            <div style=" height: 100px;margin-left: 100px ;width:600px ">
+                                                <div style=" height:100px ;width: 150px">
+                                                    <a class="pull-left">电脑型号</a><br>
+                                                    <span class="pull-left">操作系统</span><br>
+                                                    <span class="pull-left">CPU</span><br>
+                                                    <span class="pull-left">主板</span><br>
+                                                    <span class="pull-left">电脑型号</span>
+
+                                                </div>
+
+                                                <div class="pull-right" style=" height:100px;width: 450px;margin-top: -100px">
+                                                    <span class="pull-left">技嘉 B85M-D2V</span><br>
+                                                    <span class="pull-left">Microsoft Windows 7 旗舰版  (64位/Service Pack 1)</span><br>
+                                                    <span class="pull-left">(英特尔)Intel(R) Core(TM) i5-4440 CPU @ 3.10GHz(3101 MHz)</span><br>
+                                                    <span class="pull-left">技嘉 B85M-D2V</span><br>
+                                                    <span class="pull-left">i5-4440 CPU @ 3.10GHz(3101 MHz)</span>
+
+                                                </div>
+
+                                            </div>
+
+
+                                        </li>
+                                    </ul>
+                                </div>
+
+                                <ul class="list-group list-group-lg no-bg auto" id="rj_list_info">
+                                    <li class="list-group-item clearfix" style="height: 60px">
+                                        <span class="pull-left thumb-sm avatar m-r"><img  src="img/a4.jpg" alt="..."></span>
+                                        <span class="clear" style="float: left; width: 240px">
+                                            <span >
+                                                <a  class="text-info font-bold">360<i class="icon-twitter"></i></a>
+                                            </span>
+                                            <small class="text-muted clear text-ellipsis" >360安全衛士</small>
+                                        </span>
+
+
+                                        <div class=" pull-left " style=" height:54px;width:400px;margin-top: -14px;">
+
+                                            <div   class=" pull-left "  style=" height:54px ;width: 150px ;">
+
+                                                <span class="pull-right  text-info " style="margin-top: 6px">总时长：</span><br>
+                                                <span class="pull-right text-info" style="margin-top: 6px;margin-right: -54px" >平均时长：</span>
+
+                                            </div>
+
+                                            <div class="pull-left" style=" height:54px;width: 100px;margin-top: 6px">
+                                                <span class=" text-info ">200分钟</span><br>
+                                                <span class=" text-info ">200分钟</span>
+                                            </div>
+
+                                              <span class="clear   m-t-sm ">
+                                                <span >
+                                                  <a href="#" class="text-info m-l-xxl" style="margin-left: 85px">10台<i class="icon-twitter"></i></a>
+                                                </span>
+                                              </span>
+
+                                        </div>
+
+
+                                        <div style=" float: right;margin-top: 4px ;width: 78px">
+                                            <a class="btn-info btn-sm padder m-b-xs" onclick="azInfo()"> 安装详情</a>
+                                        </div>
+                                    </li>
+
+                                    <li class="list-group-item clearfix" style="height: 60px">
+                                        <span class="pull-left thumb-sm avatar m-r"><img  src="img/a4.jpg" alt="..."></span>
+                                        <span class="clear" style="float: left; width: 240px">
+                                            <span >
+                                                <a  class="text-info font-bold">360安全卫士<i class="icon-twitter"></i></a>
+                                            </span>
+                                            <small class="text-muted clear text-ellipsis" >360安全衛士</small>
+                                        </span>
+
+                                        <div class=" pull-left " style=" height:54px;width:400px;margin-top: -14px;">
+
+                                            <div   class=" pull-left "  style=" height:54px ;width: 150px ;">
+
+                                                <span class="pull-right  text-info " style="margin-top: 6px">总时长：</span><br>
+                                                <span class="pull-right text-info" style="margin-top: 6px;margin-right: -54px" >平均时长：</span>
+
+                                            </div>
+
+                                            <div class="pull-left" style=" height:54px;width: 100px;margin-top: 6px">
+                                                <span class=" text-info ">200分钟</span><br>
+                                                <span class=" text-info ">200分钟</span>
+                                            </div>
+
+                                              <span class="clear   m-t-sm ">
+                                                <span >
+                                                  <a href="#" class="text-info m-l-xxl" style="margin-left: 85px">10台<i class="icon-twitter"></i></a>
+                                                </span>
+                                              </span>
+
+                                        </div>
+
+                                        <div style=" float: right;margin-top: 4px ;width: 78px">
+                                            <a class="btn-info btn-sm padder m-b-xs" onclick="azInfo()"> 安装详情</a>
+                                        </div>
+                                    </li>
+
+
+                                    <li class="list-group-item clearfix" style="height: 60px">
+                                        <span class="pull-left thumb-sm avatar m-r"><img  src="img/a4.jpg" alt="..."></span>
+                                        <span class="clear" style="float: left; width: 240px">
+                                            <span >
+                                                <a  class="text-info font-bold">WinRAR<i class="icon-twitter"></i></a>
+                                            </span>
+                                            <small class="text-muted clear text-ellipsis" >WinRAR压缩、解压工具</small>
+                                        </span>
+
+                                        <div class=" pull-left " style=" height:54px;width:400px;margin-top: -14px;">
+
+                                            <div   class=" pull-left "  style=" height:54px ;width: 150px ;">
+
+                                                <span class="pull-right  text-info " style="margin-top: 6px">总时长：</span><br>
+                                                <span class="pull-right text-info" style="margin-top: 6px;margin-right: -55px" >平均时长：</span>
+
+                                            </div>
+
+                                            <div class="pull-left" style=" height:54px;width: 100px;margin-top: 6px">
+                                                <span class=" text-info ">200分钟</span><br>
+                                                <span class=" text-info ">200分钟</span>
+                                            </div>
+
+                                              <span class="clear   m-t-sm ">
+                                                <span >
+                                                  <a href="#" class="text-info m-l-xxl" style="margin-left: 86px">10台<i class="icon-twitter"></i></a>
+                                                </span>
+                                              </span>
+
+                                        </div>
+
+                                        <div style=" float: right;margin-top: 4px ;width: 78px">
+                                            <a class="btn-info btn-sm padder m-b-xs" onclick="azInfo()"> 安装详情</a>
+                                        </div>
+                                    </li>
+
+
+                                    <li class="list-group-item clearfix" style="height: 60px">
+                                        <span class="pull-left thumb-sm avatar m-r"><img  src="img/a4.jpg" alt="..."></span>
+                                        <span class="clear" style="float: left; width: 240px">
+                                            <span >
+                                                <a  class="text-info font-bold">办公卫士<i class="icon-twitter"></i></a>
+                                            </span>
+                                            <small class="text-muted clear text-ellipsis" >办公安全管理</small>
+                                        </span>
+
+                                        <div class=" pull-left " style=" height:54px;width:400px;margin-top: -14px;">
+
+                                            <div   class=" pull-left "  style=" height:54px ;width: 150px ;">
+
+                                                <span class="pull-right  text-info " style="margin-top: 6px">总时长：</span><br>
+                                                <span class="pull-right text-info" style="margin-top: 6px;margin-right: -55px" >平均时长：</span>
+
+                                            </div>
+
+                                            <div class="pull-left" style=" height:54px;width: 100px;margin-top: 6px">
+                                                <span class=" text-info ">200分钟</span><br>
+                                                <span class=" text-info ">200分钟</span>
+                                            </div>
+
+                                              <span class="clear   m-t-sm ">
+                                                <span >
+                                                  <a href="#" class="text-info m-l-xxl" style="margin-left: 85px">10台<i class="icon-twitter"></i></a>
+                                                </span>
+                                              </span>
+
+                                        </div>
+
+                                        <div style=" float: right;margin-top: 4px ;width: 78px">
+                                            <a class="btn-info btn-sm padder m-b-xs" onclick="azInfo()"> 安装详情</a>
+                                        </div>
+                                    </li>
+
+
+
+                                    <li class="list-group-item clearfix" style="height: 60px">
+                                        <span class="pull-left thumb-sm avatar m-r"><img  src="img/a4.jpg" alt="..."></span>
+                                        <span class="clear" style="float: left; width: 240px">
+                                            <span >
+                                                <a  class="text-info font-bold">天下技术网<i class="icon-twitter"></i></a>
+                                            </span>
+                                            <small class="text-muted clear text-ellipsis" >学习技术</small>
+                                        </span>
+
+                                        <div class=" pull-left " style=" height:54px;width:400px;margin-top: -14px;">
+
+                                            <div   class=" pull-left "  style=" height:54px ;width: 150px ;">
+
+                                                <span class="pull-right  text-info " style="margin-top: 6px">总时长：</span><br>
+                                                <span class="pull-right text-info" style="margin-top: 6px;margin-right: -55px" >平均时长：</span>
+
+                                            </div>
+
+                                            <div class="pull-left" style=" height:54px;width: 100px;margin-top: 6px">
+                                                <span class=" text-info ">200分钟</span><br>
+                                                <span class=" text-info ">200分钟</span>
+                                            </div>
+
+                                              <span class="clear   m-t-sm ">
+                                                <span >
+                                                  <a href="#" class="text-info m-l-xxl" style="margin-left: 85px">10台<i class="icon-twitter"></i></a>
+                                                </span>
+                                              </span>
+
+                                        </div>
+
+                                        <div style=" float: right;margin-top: 4px ;width: 78px">
+                                            <a class="btn-info btn-sm padder m-b-xs" onclick="azInfo()"> 安装详情</a>
+                                        </div>
+                                    </li>
+
+
+                                    <li class="list-group-item clearfix" style="height: 60px">
+                                        <span class="pull-left thumb-sm avatar m-r"><img  src="img/a4.jpg" alt="..."></span>
+                                        <span class="clear" style="float: left; width: 240px">
+                                            <span >
+                                                <a  class="text-info font-bold">IE 11.0 for XP<i class="icon-twitter"></i></a>
+                                            </span>
+                                            <small class="text-muted clear text-ellipsis" >浏览器</small>
+                                        </span>
+
+                                        <div class=" pull-left " style=" height:54px;width:400px;margin-top: -14px;">
+
+                                            <div   class=" pull-left "  style=" height:54px ;width: 150px ;">
+
+                                                <span class="pull-right  text-info " style="margin-top: 6px">总时长：</span><br>
+                                                <span class="pull-right text-info" style="margin-top: 6px;margin-right: -55px" >平均时长：</span>
+
+                                            </div>
+
+                                            <div class="pull-left" style=" height:54px;width: 100px;margin-top: 6px">
+                                                <span class=" text-info ">200分钟</span><br>
+                                                <span class=" text-info ">200分钟</span>
+                                            </div>
+
+                                              <span class="clear   m-t-sm ">
+                                                <span >
+                                                  <a href="#" class="text-info m-l-xxl" style="margin-left: 85px">10台<i class="icon-twitter"></i></a>
+                                                </span>
+                                              </span>
+
+                                        </div>
+
+                                        <div style=" float: right;margin-top: 4px ;width: 78px">
+                                            <a class="btn-info btn-sm padder m-b-xs" onclick="azInfo()"> 安装详情</a>
+                                        </div>
+                                    </li>
+
+
+                                    <li class="list-group-item clearfix" style="height: 60px">
+                                        <span class="pull-left thumb-sm avatar m-r"><img  src="img/a4.jpg" alt="..."></span>
+                                        <span class="clear" style="float: left; width: 240px">
+                                            <span >
+                                                <a  class="text-info font-bold">谷歌Chromium<i class="icon-twitter"></i></a>
+                                            </span>
+                                            <small class="text-muted clear text-ellipsis" >浏览器程序员调试</small>
+                                        </span>
+
+                                        <div class=" pull-left " style=" height:54px;width:400px;margin-top: -14px;">
+
+                                            <div   class=" pull-left "  style=" height:54px ;width: 150px ;">
+
+                                                <span class="pull-right  text-info " style="margin-top: 6px">总时长：</span><br>
+                                                <span class="pull-right text-info" style="margin-top: 6px;margin-right: -55px" >平均时长：</span>
+
+                                            </div>
+
+                                            <div class="pull-left" style=" height:54px;width: 100px;margin-top: 6px">
+                                                <span class=" text-info ">200分钟</span><br>
+                                                <span class=" text-info ">200分钟</span>
+                                            </div>
+
+                                              <span class="clear   m-t-sm ">
+                                                <span >
+                                                  <a href="#" class="text-info m-l-xxl" style="margin-left: 85px">10台<i class="icon-twitter"></i></a>
+                                                </span>
+                                              </span>
+
+                                        </div>
+                                        <div style=" float: right;margin-top: 4px ;width: 78px">
+                                            <a class="btn-info btn-sm padder m-b-xs" onclick="azInfo()"> 安装详情</a>
+                                        </div>
+                                    </li>
+
+
+
+                                </ul>
+                            </div>
+
+
+                        </div>
+                    </div>
+                    <<div class="page" style="text-align: right; margin: 10px">
+                    <a class=" wrapper-xs btn  btn-rounded page"  onclick="last()"> 上一页 </a>
+                                <span id="page" >
+                                      <a  class="wrapper-xs btn-info btn-rounded"> 1</a>
+                                      <a class="wrapper-xs btn  btn-rounded">2</a>
+                                      <a  class="wrapper-xs btn  btn-rounded">3</a>
+                                      <a class="wrapper-xs btn  btn-rounded">4</a>
+                                      <a class="wrapper-xs btn  btn-rounded">5</a>
+                                 </span>
+                    <a class=" wrapper-xs btn  btn-rounded page"  onclick="next()"> 下一页 </a>
+                </div>
+                </div>
+            </div>
+        </div>
+
+
+    </div>
+
+</div>

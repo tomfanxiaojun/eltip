@@ -1,0 +1,22 @@
+<div class="container w-xl w-auto-xs" ng-init="app.settings.container = false;">
+  <div class="h1 text-center">找回密码</div>
+  <div class="m-b-lg">
+    <div class="wrapper text-center text-muted">
+      密码重置邮件会发送到企业注册的邮箱
+    </div>
+    <form name="reset" ng-init="isCollapsed=true">
+      <div class="input-group m-b-md">
+        <span class="input-group-addon input-lg"><i class="fa fa-envelope"></i></span>
+        <input type="email" placeholder="请输入注册的邮箱账号" class="form-control input-lg" ng-model="email" required>
+      </div>
+      <button type="submit" ng-disabled="reset.$invalid" class="btn btn-lg btn-primary btn-block"  ng-click="isCollapsed = !isCollapsed" >提交</button>
+    </form>
+    <div collapse="isCollapsed" class="text-center m-t">
+      <div class="clear alert alert-success">
+        提交成功！<br>密码重置邮件已发送到您的邮箱<br>请在及时登陆邮箱修改新密码！</p>
+        <div class="btn btn-sm btn-success" ui-sref="access.signin">返回登陆</div>
+      </div>
+    </div>
+  </div>
+  <div class="text-center" ng-include="'tpl/blocks/page_footer.html'"></div>
+</div>

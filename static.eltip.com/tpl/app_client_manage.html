@@ -1,0 +1,536 @@
+
+<script type="application/javascript">
+    $(document).ready(function(){
+        $("#page a").click(function(){
+            var a_items= $('#page a');
+            a_items.removeClass();
+            $(this).addClass("wrapper-xs btn-primary btn-rounded");
+
+        });
+    });
+
+    function  last(){
+        var className='wrapper-xs btn-primary btn-rounded';
+
+        var a_items= $('#page a');
+        var nextIndex=0;
+        for(var i=0;i<a_items.size();i++){
+            var  a_tag=a_items[i];
+            if(a_tag.className==className){
+                nextIndex=i-1;
+                break;
+            }
+        }
+        if(nextIndex<0){
+            nextIndex=a_items.size()-1;
+        }
+
+        a_items.removeClass();
+        $(a_items[nextIndex]).addClass(className);
+    }
+
+
+    function next(){
+        //选中的样式
+        var className='wrapper-xs btn-primary btn-rounded';
+
+        //jqeruy里面的元素查找， 在id为page元素里面查找所有的 a标签，
+        var a_items= $('#page a');
+        //选中的下标
+        var nextIndex=0;
+        //循环所有的a标签
+        for(var i=0;i<a_items.size();i++){
+            var  a_tag=a_items[i];
+
+            //如果当前的a标签已经选中，下一页，则应该是当前下标+1
+            if(a_tag.className==className){
+                nextIndex=i+1;
+                break;
+            }
+        }
+        //如果下标超过了最大长度，则从0开始
+        if((nextIndex+1)>a_items.size()){
+            nextIndex=0;
+        }
+        //移除所有a标签上的样式
+        a_items.removeClass();
+        //根据下标，添加选中时的样式
+        $(a_items[nextIndex]).addClass(className);
+    }
+
+</script>
+
+<div>
+    <div class="wrapper-md bg-light b-b">
+        <button type="button" class="btn btn-default btn-addon pull-right m-t-n-xs" ui-toggle-class="show" target="#aside">
+            <i class="fa fa-bars"></i>部署状态
+        </button>
+        <h1 class="m-n font-thin h3">终端管理</h1>
+    </div>
+    <!-- main -->
+    <!-- main header -->
+    <div class="wrapper-md">
+        <!-- tasks -->
+        <div class="row show" id="aside">
+            <div class="col-md-12">
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="panel b-a">
+                            <div class="panel-heading bg-primary dk no-border">
+                                <div class="m-b-xs">
+                                    <button class="pull-right btn btn-rounded btn-sm btn-icon btn-default"
+                                            popover-placement="bottom" popover="部署终端" popover-trigger="mouseenter">
+                                        <i class="fa fa-gears"></i>
+                                    </button>
+                                    <span class="h5 text-white">终端部署状态</span>
+                                </div>
+                                <div class="text-center m-lg">
+                                    <h class="font-normal h1 text-white">3,000</h>
+                                    <small class="text-muted block">已部署(个)</small>
+                                </div>
+                            </div>
+                            <div class="wrapper-xs b-t b-light bg-light lter row text-center no-gutter">
+                                <div class="col-xs-4">
+                                    <div class="inline m-t-sm">
+                                        <div ui-jq="easyPieChart" ui-options="{
+                      percent: 30,
+                      lineWidth: 3,
+                      trackColor: '{{app.color.light}}',
+                      barColor: '{{app.color.success}}',
+                      scaleColor: false,
+                      color: '#fff',
+                      size: 65,
+                      lineCap: 'butt',
+                      rotate: 45,
+                      animate: 1000
+                    }">
+                                            <div>
+                                                <span class="step">30</span>%
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="m-sm">
+                                        <span class="text-md text-success">900</span>
+                                        <small class="text-dark block">在线</small>
+                                    </div>
+                                </div>
+                                <div class="col-xs-4">
+                                    <div class="inline m-t-sm">
+                                        <div ui-jq="easyPieChart" ui-options="{
+                      percent: 50,
+                      lineWidth: 3,
+                      trackColor: '{{app.color.light}}',
+                      barColor: '{{app.color.primary}}',
+                      scaleColor: false,
+                      color: '#fff',
+                      size: 65,
+                      lineCap: 'butt',
+                      rotate: 90,
+                      animate: 1000
+                    }">
+                                            <div>
+                                                <span class="step">50</span>%
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="m-sm">
+                                        <span class="text-md text-primary">1500</span>
+                                        <small class="text-dark block">离线</small>
+                                    </div>
+                                </div>
+                                <div class="col-xs-4">
+                                    <div class="inline m-t-sm">
+                                        <div ui-jq="easyPieChart" ui-options="{
+                      percent: 20,
+                      lineWidth: 3,
+                      trackColor: '{{app.color.light}}',
+                      barColor: '{{app.color.warning}}',
+                      scaleColor: false,
+                      color: '#fff',
+                      size: 65,
+                      lineCap: 'butt',
+                      rotate: 180,
+                      animate: 1000
+                    }">
+                                            <div>
+                                                <span class="step">20</span>%
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="m-sm">
+                                        <span class="text-md text-warning">5</span>
+                                        <small class="text-dark block">异常</small>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6" >
+                        <div ng-controller="FlotChartDemoCtrl">
+                            <div class="panel b-a">
+                                <div class="panel-heading bg-primary dk lt">
+                                    <div class="m-xs">
+                                        <span class="h5 text-white">七天在线状态</span>
+                                    </div>
+                                    <div class="text-center m-t-md">
+                                        <div ui-jq="plot" ui-options="
+              [
+                { data: {{d}}, points: { show: true, radius: 6}, splines: { show: true, tension: 0.45, lineWidth: 5, fill: 0 } }
+              ],
+              {
+                colors: ['{{app.color.info}}'],
+                series: { shadowSize: 3 },
+                xaxis:{
+                  font: { color: '#ccc' },
+                  position: 'bottom',
+                  ticks: [
+                    [ 1, 'Jan' ], [ 2, 'Feb' ], [ 3, 'Mar' ], [ 4, 'Apr' ], [ 5, 'May' ], [ 6, 'Jun' ], [ 7, 'Jul' ], [ 8, 'Aug' ], [ 9, 'Sep' ], [ 10, 'Oct' ], [ 11, 'Nov' ], [ 12, 'Dec' ]
+                  ]
+                },
+                yaxis:{ font: { color: '#ccc' } },
+                grid: { hoverable: true, clickable: true, borderWidth: 0, color: '#ccc' },
+                tooltip: true,
+                tooltipOpts: { content: '%x.1 is %y.4',  defaultTheme: false, shifts: { x: 0, y: 20 } }
+              }
+            " style="height:240px" >
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="wrapper-sm">
+                <!--下方组织结构-->
+                <div class="hbox hbox-auto-xs hbox-auto-sm" style="background: white; ">
+                    <div class="wrapper-md" >
+                        <div class="row" style="border: 1px solid rgb(214, 229, 246)">
+                            <div class="col-md-3">
+                                <tabset class="nav-tabs-alt" justified="true">
+                                    <tab>
+                                        <tab-heading><span>组织结构</span> </tab-heading>
+                                        <div class="wrapper-md" style="padding: 0px">
+                                            <div class="b-a bg-light dk r r-2x">
+                                                <ul tree id="tree" class="ztree bg-white" ng-model="selectNode"></ul>
+                                            </div>
+                                        </div>
+                                    </tab>
+                                </tabset>
+                            </div>
+
+                            <!-- 下方右侧布局-->
+                            <div class="col-md-9" >
+                                <div class="row wrapper-sm">
+                                    <div class="input-group pull-left  w-xxl">
+                                        <input class="form-control input-sm "
+                                               placeholder="请键入搜索关键词" type="text">
+
+                                        <span class="input-group-btn">
+                                            <button type="submit" class="btn btn-sm  rounded "><i class="fa fa-search text-md"></i></button>
+                                        </span>
+                                    </div>
+                                    <button type="button" class="btn btn-default btn-addon pull-right m-t-l" ui-toggle-class="show" target="#aside">
+                                        <i class="fa fa-bars"></i>批量处理
+                                    </button>
+                                </div>
+
+                                <div class="panel b-a">
+                                    <div class="panel-heading b-light"  style="height:45px" >
+                                        <a style="display:block;" id="rj_info_game" href class="font-bold " >终端列表(共4)</a>
+                                    </div>
+
+                                    <ul class="list-group list-group-lg no-bg auto"  id="rj_list_info">
+                                        <li class="list-group-item clearfix" style="height: 65px">
+                                           <span class="pull-left thumb-sm avatar m-r">
+                                                <input type="checkbox">
+                                                <img src="img/a4.jpg" alt="...">
+                                           </span>
+                                            <span class="clear pull-left modal-sm">
+                                                    <span>
+                                                        <a href="#" class="text-info font-bold">Kvin Geng</a>
+                                                    </span>
+                                                    <small class="text-muted clear text-ellipsis" >192.168.2.1</small>
+                                            </span>
+                                            <div class="pull-left" >
+                                                <span >
+                                                    <a href="#" class="text-info  col-lg-offset-5">研发部</a>
+                                                </span>
+                                                <small class="text-muted clear text-ellipsis col-lg-offset-4">2016-4-5 14:25</small>
+                                            </div>
+                                            <div class="pull-right">
+                                               <div style="margin-top: -9px"><a class="open  btn-default btn-sm m-b-xs" >绑定</a>
+                                                <a class="btn-info btn-sm  padder m-b-xs" >关机</a>
+                                              </div>
+                                                <div style="margin-top: 10px"><a class="open  btn-default btn-sm  m-b-xs" style="margin-top: 10px">卸载</a>
+                                                <a class="btn-info btn-sm  padder m-b-xs" >待机</a></div>
+                                            </div>
+                                        </li>
+
+                                        <li class="list-group-item clearfix" style="height: 65px">
+                                           <span class="pull-left thumb-sm avatar m-r">
+                                                <input type="checkbox">
+                                                <img src="img/a4.jpg" alt="...">
+                                           </span>
+                                            <span class="clear pull-left modal-sm">
+                                                    <span>
+                                                        <a href="#" class="text-info font-bold">Oregon</a>
+                                                    </span>
+                                                    <small class="text-muted clear text-ellipsis" >192.168.2.1</small>
+                                            </span>
+                                            <div class="pull-left" >
+                                                <span >
+                                                    <a href="#" class="text-info  col-lg-offset-5">销售部</a>
+                                                </span>
+                                                <small class="text-muted clear text-ellipsis col-lg-offset-4">2016-4-5 14:25</small>
+                                            </div>
+                                            <div class="pull-right">
+                                                <div style="margin-top: -9px"><a class="open  btn-default btn-sm m-b-xs" >绑定</a>
+                                                    <a class="btn-info btn-sm  padder m-b-xs" >关机</a>
+                                                </div>
+                                                <div style="margin-top: 10px"><a class="open  btn-default btn-sm  m-b-xs" style="margin-top: 10px">卸载</a>
+                                                    <a class="btn-info btn-sm  padder m-b-xs" >待机</a></div>
+                                            </div>
+                                        </li>
+
+                                        <li class="list-group-item clearfix" style="height: 65px">
+                                           <span class="pull-left thumb-sm avatar m-r">
+                                                <input type="checkbox">
+                                                <img src="img/a4.jpg" alt="...">
+                                           </span>
+                                            <span class="clear pull-left modal-sm">
+                                                    <span>
+                                                        <a href="#" class="text-info font-bold">banana</a>
+                                                    </span>
+                                                    <small class="text-muted clear text-ellipsis" >192.168.2.1</small>
+                                            </span>
+                                            <div class="pull-left" >
+                                                <span >
+                                                    <a href="#" class="text-info  col-lg-offset-5">人事部</a>
+                                                </span>
+                                                <small class="text-muted clear text-ellipsis col-lg-offset-4">2016-4-5 14:25</small>
+                                            </div>
+                                            <div class="pull-right">
+                                                <div style="margin-top: -9px"><a class="open  btn-default btn-sm m-b-xs" >绑定</a>
+                                                    <a class="btn-info btn-sm  padder m-b-xs" >关机</a>
+                                                </div>
+                                                <div style="margin-top: 10px"><a class="open  btn-default btn-sm  m-b-xs" style="margin-top: 10px">卸载</a>
+                                                    <a class="btn-info btn-sm  padder m-b-xs" >待机</a></div>
+                                            </div>
+                                        </li>
+
+                                        <li class="list-group-item clearfix" style="height: 65px">
+                                           <span class="pull-left thumb-sm avatar m-r">
+                                                <input type="checkbox">
+                                                <img src="img/a4.jpg" alt="...">
+                                           </span>
+                                            <span class="clear pull-left modal-sm">
+                                                    <span>
+                                                        <a href="#" class="text-info font-bold">Kvin</a>
+                                                    </span>
+                                                    <small class="text-muted clear text-ellipsis" >192.168.2.1</small>
+                                            </span>
+                                            <div class="pull-left" >
+                                                <span >
+                                                    <a href="#" class="text-info  col-lg-offset-5">行政部</a>
+                                                </span>
+                                                <small class="text-muted clear text-ellipsis col-lg-offset-4">2016-4-5 14:25</small>
+                                            </div>
+                                            <div class="pull-right">
+                                                <div style="margin-top: -9px"><a class="open  btn-default btn-sm m-b-xs" >绑定</a>
+                                                    <a class="btn-info btn-sm  padder m-b-xs" >关机</a>
+                                                </div>
+                                                <div style="margin-top: 10px"><a class="open  btn-default btn-sm  m-b-xs" style="margin-top: 10px">卸载</a>
+                                                    <a class="btn-info btn-sm  padder m-b-xs" >待机</a></div>
+                                            </div>
+                                        </li>
+
+
+                                        <li class="list-group-item clearfix" style="height: 65px">
+                                           <span class="pull-left thumb-sm avatar m-r">
+                                                <input type="checkbox">
+                                                <img src="img/a4.jpg" alt="...">
+                                           </span>
+                                            <span class="clear pull-left modal-sm">
+                                                    <span>
+                                                        <a href="#" class="text-info font-bold">fly</a>
+                                                    </span>
+                                                    <small class="text-muted clear text-ellipsis" >192.168.2.1</small>
+                                            </span>
+                                            <div class="pull-left" >
+                                                <span >
+                                                    <a href="#" class="text-info  col-lg-offset-5">UI部</a>
+                                                </span>
+                                                <small class="text-muted clear text-ellipsis col-lg-offset-4">2016-4-5 14:25</small>
+                                            </div>
+                                            <div class="pull-right">
+                                                <div style="margin-top: -9px"><a class="open  btn-default btn-sm m-b-xs" >绑定</a>
+                                                    <a class="btn-info btn-sm  padder m-b-xs" >关机</a>
+                                                </div>
+                                                <div style="margin-top: 10px"><a class="open  btn-default btn-sm  m-b-xs" style="margin-top: 10px">卸载</a>
+                                                    <a class="btn-info btn-sm  padder m-b-xs" >待机</a></div>
+                                            </div>
+                                        </li>
+
+
+                                        <li class="list-group-item clearfix" style="height: 65px">
+                                           <span class="pull-left thumb-sm avatar m-r">
+                                                <input type="checkbox">
+                                                <img src="img/a4.jpg" alt="...">
+                                           </span>
+                                            <span class="clear pull-left modal-sm">
+                                                    <span>
+                                                        <a href="#" class="text-info font-bold">skin</a>
+                                                    </span>
+                                                    <small class="text-muted clear text-ellipsis" >192.168.2.1</small>
+                                            </span>
+                                            <div class="pull-left" >
+                                                <span >
+                                                    <a href="#" class="text-info  col-lg-offset-5">总监</a>
+                                                </span>
+                                                <small class="text-muted clear text-ellipsis col-lg-offset-4">2016-4-5 14:25</small>
+                                            </div>
+                                            <div class="pull-right">
+                                                <div style="margin-top: -9px"><a class="open  btn-default btn-sm m-b-xs" >绑定</a>
+                                                    <a class="btn-info btn-sm  padder m-b-xs" >关机</a>
+                                                </div>
+                                                <div style="margin-top: 10px"><a class="open  btn-default btn-sm  m-b-xs" style="margin-top: 10px">卸载</a>
+                                                    <a class="btn-info btn-sm  padder m-b-xs" >待机</a></div>
+                                            </div>
+                                        </li>
+
+                                        <li class="list-group-item clearfix" style="height: 65px">
+                                           <span class="pull-left thumb-sm avatar m-r">
+                                                <input type="checkbox">
+                                                <img src="img/a4.jpg" alt="...">
+                                           </span>
+                                            <span class="clear pull-left modal-sm">
+                                                    <span>
+                                                        <a href="#" class="text-info font-bold">Kvin Geng</a>
+                                                    </span>
+                                                    <small class="text-muted clear text-ellipsis" >192.168.2.1</small>
+                                            </span>
+                                            <div class="pull-left" >
+                                                <span >
+                                                    <a href="#" class="text-info  col-lg-offset-5">产品部</a>
+                                                </span>
+                                                <small class="text-muted clear text-ellipsis col-lg-offset-4">2016-4-5 14:25</small>
+                                            </div>
+                                            <div class="pull-right">
+                                                <div style="margin-top: -9px"><a class="open  btn-default btn-sm m-b-xs" >绑定</a>
+                                                    <a class="btn-info btn-sm  padder m-b-xs" >关机</a>
+                                                </div>
+                                                <div style="margin-top: 10px"><a class="open  btn-default btn-sm  m-b-xs" style="margin-top: 10px">卸载</a>
+                                                    <a class="btn-info btn-sm  padder m-b-xs" >待机</a></div>
+                                            </div>
+                                        </li>
+
+                                        <li class="list-group-item clearfix" style="height: 65px">
+                                           <span class="pull-left thumb-sm avatar m-r">
+                                                <input type="checkbox">
+                                                <img src="img/a4.jpg" alt="...">
+                                           </span>
+                                            <span class="clear pull-left modal-sm">
+                                                    <span>
+                                                        <a href="#" class="text-info font-bold">feel</a>
+                                                    </span>
+                                                    <small class="text-muted clear text-ellipsis" >192.168.2.1</small>
+                                            </span>
+                                            <div class="pull-left" >
+                                                <span >
+                                                    <a href="#" class="text-info  col-lg-offset-5">财务部</a>
+                                                </span>
+                                                <small class="text-muted clear text-ellipsis col-lg-offset-4">2016-4-5 14:25</small>
+                                            </div>
+                                            <div class="pull-right">
+                                                <div style="margin-top: -9px"><a class="open  btn-default btn-sm m-b-xs" >绑定</a>
+                                                    <a class="btn-info btn-sm  padder m-b-xs" >关机</a>
+                                                </div>
+                                                <div style="margin-top: 10px"><a class="open  btn-default btn-sm  m-b-xs" style="margin-top: 10px">卸载</a>
+                                                    <a class="btn-info btn-sm  padder m-b-xs" >待机</a></div>
+                                            </div>
+                                        </li>
+
+                                        <li class="list-group-item clearfix" style="height: 65px">
+                                           <span class="pull-left thumb-sm avatar m-r">
+                                                <input type="checkbox">
+                                                <img src="img/a4.jpg" alt="...">
+                                           </span>
+                                            <span class="clear pull-left modal-sm">
+                                                    <span>
+                                                        <a href="#" class="text-info font-bold">kit</a>
+                                                    </span>
+                                                    <small class="text-muted clear text-ellipsis" >192.168.2.1</small>
+                                            </span>
+                                            <div class="pull-left" >
+                                                <span >
+                                                    <a href="#" class="text-info  col-lg-offset-5">保安部</a>
+                                                </span>
+                                                <small class="text-muted clear text-ellipsis col-lg-offset-4">2016-4-5 14:25</small>
+                                            </div>
+                                            <div class="pull-right">
+                                                <div style="margin-top: -9px"><a class="open  btn-default btn-sm m-b-xs" >绑定</a>
+                                                    <a class="btn-info btn-sm  padder m-b-xs" >关机</a>
+                                                </div>
+                                                <div style="margin-top: 10px"><a class="open  btn-default btn-sm  m-b-xs" style="margin-top: 10px">卸载</a>
+                                                    <a class="btn-info btn-sm  padder m-b-xs" >待机</a></div>
+                                            </div>
+                                        </li>
+
+                                        <li class="list-group-item clearfix" style="height: 65px">
+                                           <span class="pull-left thumb-sm avatar m-r">
+                                                <input type="checkbox">
+                                                <img src="img/a4.jpg" alt="...">
+                                           </span>
+                                            <span class="clear pull-left modal-sm">
+                                                    <span>
+                                                        <a href="#" class="text-info font-bold">Kvin Geng</a>
+                                                    </span>
+                                                    <small class="text-muted clear text-ellipsis" >192.168.2.1</small>
+                                            </span>
+                                            <div class="pull-left" >
+                                                <span >
+                                                    <a href="#" class="text-info  col-lg-offset-5">测试部</a>
+                                                </span>
+                                                <small class="text-muted clear text-ellipsis col-lg-offset-4">2016-4-5 14:25</small>
+                                            </div>
+                                            <div class="pull-right">
+                                                <div style="margin-top: -9px"><a class="open  btn-default btn-sm m-b-xs" >绑定</a>
+                                                    <a class="btn-info btn-sm  padder m-b-xs" >关机</a>
+                                                </div>
+                                                <div style="margin-top: 10px"><a class="open  btn-default btn-sm  m-b-xs" style="margin-top: 10px">卸载</a>
+                                                    <a class="btn-info btn-sm  padder m-b-xs" >待机</a></div>
+                                            </div>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="page" style="text-align: right; margin: 10px">
+                            <a class=" wrapper-xs btn  btn-rounded page"  onclick="last()"> 上一页 </a>
+                                <span id="page" >
+                                      <a  class="wrapper-xs btn-info btn-rounded"> 1</a>
+                                      <a class="wrapper-xs btn  btn-rounded">2</a>
+                                      <a  class="wrapper-xs btn  btn-rounded">3</a>
+                                      <a class="wrapper-xs btn  btn-rounded">4</a>
+                                      <a class="wrapper-xs btn  btn-rounded">5</a>
+                                 </span>
+                            <a class=" wrapper-xs btn  btn-rounded page"  onclick="next()"> 下一页 </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- / tasks -->
+
+    <!-- service -->
+
+    <!-- / service -->
+
+    <!-- / main header -->
+
+
+</div>

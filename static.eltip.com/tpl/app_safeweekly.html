@@ -1,0 +1,189 @@
+
+<script type="application/javascript">
+  $(document).ready(function(){
+    $("#page a").click(function(){
+      var a_items= $('#page a');
+      a_items.removeClass();
+      $(this).addClass("wrapper-xs btn-primary btn-rounded");
+
+    });
+  });
+
+  function  last(){
+    var className='wrapper-xs btn-primary btn-rounded';
+
+    var a_items= $('#page a');
+    var nextIndex=0;
+    for(var i=0;i<a_items.size();i++){
+      var  a_tag=a_items[i];
+      if(a_tag.className==className){
+        nextIndex=i-1;
+        break;
+      }
+    }
+    if(nextIndex<0){
+      nextIndex=a_items.size()-1;
+    }
+
+    a_items.removeClass();
+    $(a_items[nextIndex]).addClass(className);
+  }
+
+
+  function next(){
+    //选中的样式
+    var className='wrapper-xs btn-primary btn-rounded';
+
+    //jqeruy里面的元素查找， 在id为page元素里面查找所有的 a标签，
+    var a_items= $('#page a');
+    //选中的下标
+    var nextIndex=0;
+    //循环所有的a标签
+    for(var i=0;i<a_items.size();i++){
+      var  a_tag=a_items[i];
+
+      //如果当前的a标签已经选中，下一页，则应该是当前下标+1
+      if(a_tag.className==className){
+        nextIndex=i+1;
+        break;
+      }
+    }
+    //如果下标超过了最大长度，则从0开始
+    if((nextIndex+1)>a_items.size()){
+      nextIndex=0;
+    }
+    //移除所有a标签上的样式
+    a_items.removeClass();
+    //根据下标，添加选中时的样式
+    $(a_items[nextIndex]).addClass(className);
+  }
+
+</script>
+
+<div>
+  <div class="wrapper-md  b-b">
+
+    <h1 class="m-n font-thin h3">安全周报</h1>
+  </div>
+  <!-- main -->
+  <!-- main header -->
+  <div class="wrapper-md">
+    <!-- tasks -->
+
+    <div class="row">
+      <div class="wrapper-sm">
+        <!--下方组织结构-->
+        <div class="hbox hbox-auto-xs hbox-auto-sm" style="background: white; ">
+          <div class="wrapper-md" >
+            <div class="row" style="border: 1px solid rgb(214, 229, 246)">
+
+
+              <!-- 下方右侧布局-->
+              <div class="col-md-12" >
+                <div class="row wrapper-sm">
+
+
+                          <label class="pull-left " ng-controller="DatepickerDemoCtrl" >
+                              <div class="input-group w m-l-xs">
+                                    <input type="text" class="form-control" datepicker-popup="{{format}}" ng-model="dt" is-open="opened" datepicker-options="dateOptions" ng-required="true" close-text="关闭" />
+                              <span class="input-group-btn">
+                                <button type="button" class="btn btn-default" ng-click="open($event)"><i class="glyphicon glyphicon-calendar"></i></button>
+                              </span>
+                              </div>
+                          </label>
+                        <span class="pull-left m-t-xs">&nbsp;至&nbsp;</span>
+                          <label class="pull-left " ng-controller="DatepickerDemoCtrl" >
+                              <div class="input-group w">
+                                  <input type="text" class="form-control" datepicker-popup="{{format}}" ng-model="dt" is-open="opened" datepicker-options="dateOptions" ng-required="true" close-text="关闭" />
+                              <span class="input-group-btn">
+                                <button type="button" class="btn btn-default" ng-click="open($event)"><i class="glyphicon glyphicon-calendar"></i></button>
+                              </span>
+                              </div>
+                          </label>
+
+                            <span class="pull-left input-group-btn">
+                                <button type="submit" class="btn btn-sm  rounded "><i class="fa fa-search text-md"></i></button>
+                          </span>
+
+
+
+
+
+                </div>
+
+                <div class="panel b-a">
+                  <div class="panel-heading b-light"  style="height:45px" >
+                    <a style="display:block;" id="rj_info_game" href class="font-bold " >周统计列表</a>
+                  </div>
+
+                  <ul class="list-group list-group-lg no-bg auto"  id="rj_list_info">
+                    <li class="list-group-item clearfix" style="height: 65px">
+                        <span class="pull-left thumb-sm avatar m-r">
+                           <img src="img/a4.jpg" alt="...">
+                         </span>
+                         <span class="clear pull-left modal-sm">
+                            <span>
+                                <a href="#" class="text-info font-bold">第五周报</a>
+                            </span>
+                            <small class="text-muted clear text-ellipsis" >2016/6/6-2016/6/12</small>
+                          </span>
+                      <div class="pull-left " style="margin-left: 280px" >
+                        <span ><a href="#" class="text-info  col-lg-offset-7">发布时间</a></span>
+                        <small class="text-muted clear text-ellipsis col-lg-offset-6">2016/6/13 14:25</small>
+                      </div>
+                      <div class="pull-right">
+                        <span ><a ui-sref="app.see" class="text-info ">查看</a></span>
+                      </div>
+                    </li>
+
+                      <li class="list-group-item clearfix" style="height: 65px">
+                        <span class="pull-left thumb-sm avatar m-r">
+                           <img src="img/a4.jpg" alt="...">
+                         </span>
+                         <span class="clear pull-left modal-sm">
+                            <span>
+                                <a href="#" class="text-info font-bold">第六周报</a>
+                            </span>
+                            <small class="text-muted clear text-ellipsis" >2016/6/13-2016/6/19</small>
+                          </span>
+                          <div class="pull-left " style="margin-left: 280px" >
+                              <span ><a href="#" class="text-info  col-lg-offset-7">发布时间</a></span>
+                              <small class="text-muted clear text-ellipsis col-lg-offset-6">2016/6/20 14:25</small>
+                          </div>
+                          <div class="pull-right">
+                              <span ><a ui-sref="app.see" class="text-info ">查看</a></span>
+                          </div>
+                      </li>
+
+
+
+                  </ul>
+                </div>
+              </div>
+            </div>
+            <div class="page" style="text-align: right; margin: 10px">
+              <a class=" wrapper-xs btn  btn-rounded page"  onclick="last()"> 上一页 </a>
+                                <span id="page" >
+                                      <a  class="wrapper-xs btn-info btn-rounded"> 1</a>
+                                      <a class="wrapper-xs btn  btn-rounded">2</a>
+                                      <a  class="wrapper-xs btn  btn-rounded">3</a>
+                                      <a class="wrapper-xs btn  btn-rounded">4</a>
+                                      <a class="wrapper-xs btn  btn-rounded">5</a>
+                                 </span>
+              <a class=" wrapper-xs btn  btn-rounded page"  onclick="next()"> 下一页 </a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- / tasks -->
+
+  <!-- service -->
+
+  <!-- / service -->
+
+  <!-- / main header -->
+
+
+</div>

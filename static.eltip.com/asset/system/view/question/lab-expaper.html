@@ -1,0 +1,213 @@
+<div class="hbox hbox-auto-xs hbox-auto-sm"
+     ng-controller="PaperController" style="background: white;">
+    <style>
+        .loading{
+            height: 100%;
+            padding-top: 100px;
+            text-align: center;
+            background: #edf1f2;
+        }
+        .ring-2 {
+            position: relative;
+            width: 45px;
+            height: 45px;
+            margin: 0 auto;
+            border: 4px solid #4b9cdb;
+            border-radius: 100%;
+        }
+        .ball-holder {
+            position: absolute;
+            width: 12px;
+            height: 45px;
+            left: 17px;
+            top: 0px;
+            animation: loadingE 1.3s linear infinite;
+        }
+        .ball {
+            position: absolute;
+            top: -11px;
+            left: 0;
+            width: 16px;
+            height: 16px;
+            border-radius: 100%;
+            background: #4282B3;
+        }
+        .loading-info{
+            margin-bottom: 10px;;
+            color:#4282B3;
+        }
+        @keyframes  loadingE{
+            100% {
+                transform: rotate(360deg);
+            }
+        }
+    </style>
+    <div>
+        <div>
+            <div>
+                <div class="alert alert-danger" role="alert" ng-show="errorObj.error">
+                    <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
+                    <span class="sr-only">Error:</span>
+                    {{errorObj.msg}}
+                </div>
+                <div class="wrapper-md" ng-show="!add && !viewpaper" >
+                    <div class="row"
+                         style="border: 1px solid rgb(214, 229, 246)">
+                        <div class="col-md-3">
+                            <tabset class="nav-tabs-alt"
+                                    justified="true">
+                                <tab>
+                                    <tab-heading><span>题目分类</span> </tab-heading>
+                                    <!-- 设备的树形-->
+                                    <!-- 设备的树形布局-->
+                                    <div class="wrapper-md" style="padding: 0px">
+                                        <div class="b-a bg-light dk r r-2x">
+                                            <ul experients-tree id="tree" zNodes="zNodes"  class="ztree bg-white" ng-model="selectNode"></ul>
+                                        </div>
+                                    </div>
+                                </tab>
+                            </tabset>
+                        </div>
+                        <!-- 下方右侧布局-->
+                        <div class="col-md-9" >
+                            <div class="row wrapper-sm">
+                                <div class="col-sm-3">
+                                    <div class="input-group">
+                                        <input type="text" class="input-sm form-control" ng-model="queryObj.title"  placeholder="请输入查询的试卷名称">
+                                          <span class="input-group-btn">
+                                            <button class="btn btn-sm btn-default" type="button" ng-click="onSearch()">搜索</button>
+                                          </span>
+                                    </div>
+                                </div>
+                                <div class="col-sm-9">
+                                    <div class="pull-right">
+                                        <!--<button class="btn m-b-xs btn-sm btn-info btn-addon"><i class="fa fa-plus"></i>导入</button>-->
+                                        <button class="btn m-b-xs btn-sm btn-primary btn-addon" ng-click="onAdd()"><i class="fa fa-plus" ></i>组卷</button>
+                                        <button class="btn m-b-xs btn-sm btn-warning btn-addon" ng-click="deletePaper()"><i class="fa fa-trash-o"></i>删除</button>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="table-responsive">
+                                <table class="table table-striped b-t b-light">
+                                    <thead>
+                                    <tr>
+                                        <th style="width:20px;">
+                                            <label class="i-checks m-b-none">
+                                                <input type="checkbox"><i></i>
+                                            </label>
+                                        </th>
+                                        <th>试卷名称</th>
+                                        <th>所属实验</th>
+                                        <th>题目数</th>
+                                        <th>创建时间</th>
+                                        <th>操作</th>
+                                    </tr>
+                                    </thead>
+                                    <tbody>
+                                    <tr ng-repeat="q in papers">
+                                        <td><label class="i-checks m-b-none"><input type="checkbox" id={{q.id}} ng-click="choicePaper(q)"><i></i></label></td>
+                                        <td>{{q.title}}</td>
+                                        <td>示波器</td>
+                                        <td>{{getCount(q)}}</td>
+                                        <td>2016-12-20</td>
+                                        <td>
+                                            <a href ng-click="view(q)"><i class="fa fa-file text-info text" tooltip="预览"></i></a>
+                                            <a href ng-click="edit(q)"><i class="fa fa-edit text-info text" tooltip="编辑"></i></a>
+                                        </td>
+                                    </tr>
+
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="page" style="text-align: right; margin: 10px">
+                        <a class=" wrapper-xs btn  btn-rounded page" style="color: #7266c6;" onclick="last()"> 上一页 </a>
+                         <span id="page" >
+                           <a  class="wrapper-xs btn-info btn-rounded">1</a>
+                           <a class="wrapper-xs btn  btn-rounded">2</a>
+                           <a  class="wrapper-xs btn  btn-rounded">3</a>
+                           <a class="wrapper-xs btn  btn-rounded">4</a>
+                           <a class="wrapper-xs btn  btn-rounded">5</a>
+                         </span>
+                        <a class=" wrapper-xs btn  btn-rounded page" style="color: #7266c6;" onclick="next()"> 下一页 </a>
+                    </div>
+                </div >
+                <div class="panel panel-primary" ng-show="add && !viewpaper">
+                    <div class="panel-heading m-n font-thin h3">添加试卷({{queryObj.coourseName}}->{{queryObj.exprimentName}})</div>
+                    <div class="panel-body">
+                        <form>
+                            <div class="form-group">
+                                <label for="exampleInputEmail1">试卷名称</label>
+                                <input type="text" class="form-control" ng-model="paper.title" placeholder="请输入一个试卷名称">
+                            </div>
+                            <div class="form-group">
+                                <label for="exampleInputEmail1">试卷总分</label>
+                                <input type="text" class="form-control"ng-disabled="true" ng-model="paper.total" >
+                            </div>
+                            <div class="form-group">
+                                <label for="exampleInputEmail1">及格分数</label>
+                                <input type="text" class="form-control" ng-model="paper.passScore" ng-change="checkNumber(paper,'passScore')" placeholder="请输入及格分数">
+                            </div>
+                            <div class="form-group">
+                                <label for="exampleInputEmail1">测试次数</label>
+                                <input type="text" class="form-control" ng-model="paper.testCount" ng-change="checkNumber(paper,'testCount')" placeholder="请输入测试次数">
+                            </div>
+                            <div class="form-group">
+                                <label for="exampleInputEmail1">评分权重(?)</label>
+                                <input type="text" class="form-control" ng-model="paper.weight" ng-change="checkNumber(paper,'weight')" placeholder="请输入评分权重">
+                            </div>
+                            <div class="panel panel-warning" >
+                                <div class="panel-body">
+                                    <form>
+                                        <div class="table-responsive">
+                                            <table class="table table-striped b-t b-light">
+                                                <thead>
+                                                <tr>
+                                                    <td></td>
+                                                    <th>类型</th>
+                                                    <th>试题数量</th>
+                                                    <th>每题分值</th>
+                                                </tr>
+                                                </thead>
+                                                <tbody>
+                                                <tr ng-repeat="type in questionTypes">
+                                                    <td><label class="i-checks m-b-none"><input type="checkbox" ng-model="type.checked" ng-true-value="true" ng-false-value="false"><i></i></label>
+                                                    <td>{{type.name}}</td>
+                                                    <td>
+                                                        <input type="text" ng-model="type.count" ng-disabled="!type.checked" ng-change="checkNumber(type,'count')">
+                                                    </td>
+                                                    <td>
+                                                        <input type="text" ng-model="type.score" ng-disabled="!type.checked"  ng-change="checkNumber(type,'score')">
+                                                    </td>
+                                                </tr>
+
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                    </form>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <button type="submit" class="btn btn-default" ng-click="addPaper()">提交</button>
+                                <button type="submit" class="btn btn-default" ng-click="onCancel()">取消</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+                <paper ng-show="viewpaper && !loading"></paper>
+                <div ng-show="viewpaper && loading" class="loading">
+                    <div class="loading-info">加载试卷...</div>
+                    <div class="ring-2">
+                        <div class="ball-holder">
+                            <div class="ball"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+    </div>
+
+</div>

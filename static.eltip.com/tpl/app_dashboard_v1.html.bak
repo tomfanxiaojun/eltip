@@ -1,0 +1,85 @@
+<div class="hbox hbox-auto-xs hbox-auto-sm" ng-init="
+    app.settings.asideFolded = false;
+    app.settings.asideDock = false; "
+     ng-controller="app"
+        >
+  <!-- main -->
+  <div class="col">
+    <!-- main header -->
+    <div class="bg-light lter b-b wrapper-md">
+      <div class="row">
+        <div class="col-sm-6 col-xs-12">
+          <h4 class="m-n font-thin text-black">首页</h4>
+        </div>
+      </div>
+    </div>
+    <!-- / main header -->
+    <div class="wrapper-md">
+      <!-- stats -->
+      <div class="row">
+        <div class="col-md-6" style="background-color: transparent">
+          <div class="row row-sm text-center wrapper-md">
+            <div class="col-xs-6">
+              <a href class="block panel padder-v bg-white-only item">
+                <span class="text-dark font-thin h1 block">53</span>
+                <span class="text-dark text-xs">进行中实验</span>
+                <span class="bottom text-right w-full">
+                  <i class="fa fa-cloud-upload text-muted m-r-sm"></i>
+                </span>
+              </a>
+            </div>
+            <div class="col-xs-6">
+              <a href class="block panel padder-v bg-white-only item">
+                <span class="text-dark font-thin h1 block">1,053</span>
+                <span class="text-dark text-xs">已完成实验</span>
+                <span class="bottom text-right w-full">
+                  <i class="fa fa-cloud-upload text-muted m-r-sm"></i>
+                </span>
+              </a>
+            </div>
+            <div class="col-xs-6 ">
+              <a href class="block panel padder-v bg-white-only item">
+                <span class="text-dark font-thin h1 block">2</span>
+                <span class="text-dark text-xs">未批阅实验报告</span>
+                <span class="bottom text-right w-full">
+                  <i class="fa fa-cloud-upload text-muted m-r-sm"></i>
+                </span>
+              </a>
+            </div>
+            <div class="col-xs-6">
+              <div class="panel padder-v bg-success item">
+                <div class="text-white font-thin h1">98</div>
+                <span class="text-white text-xs">故障设备</span>
+                <div class="bottom text-left">
+                  <i class="fa fa-caret-up text-warning m-l-sm"></i>
+                </div>
+              </div>
+            </div>
+            <div class="col-xs-12 m-b-md">
+              <div class="r bg-primary dker item hbox panel">
+                <div class="col w-xs v-middle hidden-md">
+                  <div ng-init="data1=[60,40]" ui-jq="sparkline" ui-options="{{data1}}, {type:'pie', height:40, sliceColors:['{{app.color.warning}}','#fff']}" class="sparkline inline"></div>
+                </div>
+                <div class="col dk padder-v r-r">
+                  <div class="text-white font-normal h1"><span>80%</span></div>
+                  <span class="text-white text-xs">累计完成教学计划</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <!--饼图-->
+        <div class="col-md-6" style="background-color: white;margin-top: 20px">
+          <div >
+            <div class="text-center m-t-md" >
+              <pie id="mainPin" legend="legendPie" item="item" data="dataPie"></pie>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+

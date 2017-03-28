@@ -1,0 +1,34 @@
+<div class="modal-over" style="background:url(img/bgx.gif) center center; background-repeat:repeat;">
+  <div class="container w-auto-xs"  ng-controller="SigninFormController" ng-init="app.settings.container = false;">
+    <div class="h1 text-center text-primary"><img src="img/logo2.png"></div>
+    <div class="container w-xxl">
+      <div class="wrapper m-t-n-lg text-center">
+        <strong>电工电子实验互联网平台</strong>
+      </div>
+      <form name="form" class="form-validation">
+        <div class="text-danger wrapper text-center" ng-show="authError">
+          {{authError}}
+        </div>
+        <div class="list-group list-group-lg">
+          <div class="input-group m-b-md">
+            <span class="input-group-addon input-lg"><i class="fa fa-user"></i></span>
+            <input type="text" placeholder="请输入邮箱账号" class="form-control input-lg" ng-model="user.email" required>
+          </div>
+          <div class="input-group m-b-md">
+            <span class="input-group-addon input-lg"><i class="fa fa-lock"></i></span>
+            <input type="password" placeholder="请输入密码" class="form-control input-lg" ng-model="user.password" required>
+          </div>
+        </div>
+        <div class="checkbox m-b-md m-t-none m-l-md">
+          <input type="checkbox" checked required><i></i> 同意 <a href>《用户许可协议》</a>
+          <a class="pull-right" ui-sref="access.forgotpwd">忘记密码？</a>
+        </div>
+        <button type="submit" class="btn btn-lg btn-primary btn-block" ng-click="login()" ng-disabled='form.$invalid'>登录</button>
+
+        <div class="line line-dashed"></div>
+        <a ui-sref="access.signup" class="btn btn-lg btn-default btn-block">学生注册</a>
+      </form>
+    </div>
+    <div class="text-center" ng-include="'tpl/blocks/page_footer.html'"></div>
+  </div>
+</div>

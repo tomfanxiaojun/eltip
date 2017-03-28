@@ -1,0 +1,466 @@
+
+<script type="application/javascript">
+  $(document).ready(function(){
+    $("#page a").click(function(){
+      var a_items= $('#page a');
+      a_items.removeClass();
+      $(this).addClass("wrapper-xs btn-info btn-rounded");
+
+    });
+  });
+
+  function  last(){
+    var className='wrapper-xs btn-info btn-rounded';
+
+    var a_items= $('#page a');
+    var nextIndex=0;
+    for(var i=0;i<a_items.size();i++){
+      var  a_tag=a_items[i];
+      if(a_tag.className==className){
+        nextIndex=i-1;
+        break;
+      }
+    }
+    if(nextIndex<0){
+      nextIndex=a_items.size()-1;
+    }
+
+    a_items.removeClass();
+    $(a_items[nextIndex]).addClass(className);
+  }
+
+
+  function next(){
+    //选中的样式
+    var className='wrapper-xs btn-info btn-rounded';
+
+    //jqeruy里面的元素查找， 在id为page元素里面查找所有的 a标签，
+    var a_items= $('#page a');
+    //选中的下标
+    var nextIndex=0;
+    //循环所有的a标签
+    for(var i=0;i<a_items.size();i++){
+      var  a_tag=a_items[i];
+
+      //如果当前的a标签已经选中，下一页，则应该是当前下标+1
+      if(a_tag.className==className){
+        nextIndex=i+1;
+        break;
+      }
+    }
+    //如果下标超过了最大长度，则从0开始
+    if((nextIndex+1)>a_items.size()){
+      nextIndex=0;
+    }
+    //移除所有a标签上的样式
+    a_items.removeClass();
+    //根据下标，添加选中时的样式
+    $(a_items[nextIndex]).addClass(className);
+  }
+
+</script>
+
+<div class="hbox hbox-auto-xs hbox-auto-sm"
+     ng-controller="AbnTestController" style="background: white; ">
+  <div>
+    <div>
+      <div>
+        <div class="wrapper-md" >
+          <div class="row"
+               style="border: 1px solid rgb(214, 229, 246)">
+            <div class="col-md-3">
+              <tabset class="nav-tabs-alt"
+                      justified="true"> <tab> <tab-heading
+                      class="nav-tabs-alt"> <span>
+									上网软件</span> </tab-heading>
+                <!--软件的左侧list-->
+                <div class="list-group">
+                  <a href class="list-group-item">
+                    <i class="fa fa-envelope fa-fw m-r-xs"></i>全部(201)
+                  </a>
+                  <a href class="list-group-item">
+                    <i  class="fa fa-eye fa-fw m-r-xs"></i>迅雷(12)
+                  </a>
+                  <a href class="list-group-item">
+                    <i class="fa fa-chevron-right text-muted"></i>
+                    <i class="fa fa-phone fa-fw m-r-xs"></i>快车(21)
+                  </a>
+                  <a href class="list-group-item">
+                    <i class="fa fa-comments-o fa-fw m-r-xs"></i>电驴 (31)
+                  </a>
+                  <a href class="list-group-item">
+                    <i class="fa fa-bookmark fa-fw m-r-xs"></i> 哇噶(13)
+                  </a>
+                  <a href class="list-group-item">
+                    <i class="fa fa-bell fa-fw m-r-xs"></i> BT(14)
+                  </a>
+                  <a href class="list-group-item">
+                    <i class="fa fa-clock-o fa-fw m-r-xs"></i> 超级旋风(16)
+                  </a>
+                  <a href class="list-group-item">
+                    <i class="fa fa-eye fa-fw m-r-xs"></i> 金蝴蝶软件(12)
+                  </a>
+                  <a href class="list-group-item">
+                    <i class="fa fa-comments-o fa-fw m-r-xs"></i>纳客软件(31)
+                  </a>
+                  <a href class="list-group-item">
+                    <i class="fa fa-bookmark fa-fw m-r-xs"></i> 鸿玮软件(13)
+                  </a>
+                  <a href class="list-group-item">
+                    <i class="fa fa-bell fa-fw m-r-xs"></i> 恒佑科技(14)
+                  </a>
+                  <a href class="list-group-item">
+                    <i class="fa fa-clock-o fa-fw m-r-xs"></i> 金银岛(16)
+                  </a>
+                </div>
+              </tab>
+                <tab>
+                  <tab-heading><span>设备</span> </tab-heading>
+                  <!-- 设备的树形-->
+                  <!-- 设备的树形布局-->
+                  <div class="wrapper-md" style="padding: 0px">
+                    <div class="b-a bg-light dk r r-2x">
+                      <ul tree3 id="tree" class="ztree bg-white" ng-model="selectNode"></ul>
+                    </div>
+                  </div>
+                </tab>
+              </tabset>
+            </div>
+              <!-- 下方右侧布局-->
+              <div class="col-md-9" >
+                  <div class="row wrapper-sm">
+                      <div class="input-group pull-left  w-xxl">
+                          <input class="form-control input-sm "  placeholder="请键入搜索关键词" type="text">
+                          <span class="input-group-btn">
+                              <button type="submit" class="btn btn-sm  rounded "><i class="fa fa-search"></i></button>
+                          </span>
+                      </div>
+                      <button type="button" class="btn btn-default btn-addon pull-right m-t-l" ui-toggle-class="show" target="#aside">
+                          <i class="fa fa-bars"></i>批量处理
+                      </button>
+
+                  </div>
+
+              <div class="panel b-a">
+                <div class="panel-heading b-light"  style="height:45px" >
+                  <a   style="display:block;" id="rj_info_game" href class="font-bold " onclick="returnClick()" >网页(21共款)</a>
+                  <a  style="display:none;" id="rj_info_game1"  href class="font-bold pull-left" >网页详情</a>
+                  <a class="text-info block m-b-xs pull-right"  style="display:none;"  onclick="returnClick()" id="return_but">返回<i class="icon-twitter"></i></a>
+                </div>
+
+                <ul class="list-group list-group-lg no-bg auto"  id="rj_list_info">
+                  <li class="list-group-item clearfix" style="height: 60px">
+                         <span class="pull-left thumb-sm avatar m-r">
+                            <img src="img/a4.jpg" alt="...">
+                         </span>
+                         <span class="clear pull-left modal-sm">
+                            <span>
+                              <a href="#" class="text-info font-bold">迅雷<i class="icon-twitter"></i></a>
+                            </span>
+                            <small class="text-muted clear text-ellipsis" >一款新型的基于P2SP技术的下载软件</small>
+                         </span>
+
+                         <span class="clear pull-left col-sm-3">
+                            <span>
+                              <a  class=" text-info col-lg-offset-2 fa fa-arrow-down"><a></a>50.2MB</a>
+                            </span>
+                            <br>
+                            <a  class="text-warning-dker col-lg-offset-2 fa fa-arrow-up"><a></a>50.2MB</i></a>
+                         </span>
+
+                          <span class="clear pull-left  m-t-sm ">
+                            <span>
+                              <a href="#" class="text-info m-l-xxl">10台<i class="icon-twitter"></i></a>
+                          </span>
+
+                         </span>
+
+                         <div class="pull-right m-t-sm"style="margin-top: 4px">
+                            <a class="open dropdown-toggle btn-default btn-sm  padder m-b-xs" >控量</a>
+                            <a class="btn-info btn-sm  padder m-b-xs" >禁用</a>
+                         </div>
+                  </li>
+
+                  <li class="list-group-item clearfix" style="height: 60px">
+                         <span class="pull-left thumb-sm avatar m-r">
+                            <img src="img/a4.jpg" alt="...">
+                         </span>
+                         <span class="clear pull-left modal-sm">
+                            <span>
+                              <a href="#" class="text-info font-bold">快车<i class="icon-twitter"></i></a>
+                            </span>
+                            <small class="text-muted clear text-ellipsis" >一款新型的基于P2SP技术的下载软件</small>
+                         </span>
+
+                         <span class="clear pull-left col-sm-3">
+                            <span>
+                              <a  class=" text-info col-lg-offset-2 fa fa-arrow-down"><a></a>50.2MB</a>
+                            </span>
+                            <br>
+                            <a  class="text-warning-dker col-lg-offset-2 fa fa-arrow-up"><a></a>50.2MB</i></a>
+                         </span>
+
+                          <span class="clear pull-left  m-t-sm ">
+                            <span>
+                              <a href="#" class="text-info m-l-xxl">9台<i class="icon-twitter"></i></a>
+                          </span>
+
+                         </span>
+
+                        <div class="pull-right m-t-sm" style="margin-top: 4px">
+                            <a class="open dropdown-toggle btn-default btn-sm  padder m-b-xs" >控量</a>
+                            <a class="btn-info btn-sm  padder m-b-xs" >禁用</a>
+                        </div>
+                  </li>
+
+                  <li class="list-group-item clearfix" style="height: 60px">
+                         <span class="pull-left thumb-sm avatar m-r">
+                            <img src="img/a4.jpg" alt="...">
+                         </span>
+                         <span class="clear pull-left modal-sm">
+                            <span>
+                              <a href="#" class="text-info font-bold">电驴<i class="icon-twitter"></i></a>
+                            </span>
+                            <small class="text-muted clear text-ellipsis" >一款新型的基于P2SP技术的下载软件</small>
+                         </span>
+
+                         <span class="clear pull-left col-sm-3">
+                            <span>
+                              <a  class=" text-info col-lg-offset-2 fa fa-arrow-down"><a></a>50.2MB</a>
+                            </span>
+                            <br>
+                            <a  class="text-warning-dker col-lg-offset-2 fa fa-arrow-up"><a></a>50.2MB</i></a>
+                         </span>
+
+                          <span class="clear pull-left  m-t-sm ">
+                            <span>
+                              <a href="#" class="text-info m-l-xxl">7台<i class="icon-twitter"></i></a>
+                          </span>
+
+                         </span>
+
+                        <div class="pull-right m-t-sm" style="margin-top: 4px">
+                            <a class="open dropdown-toggle btn-default btn-sm  padder m-b-xs" >控量</a>
+                            <a class="btn-info btn-sm  padder m-b-xs" >禁用</a>
+                        </div>
+                    </li>
+
+
+
+                  <li class="list-group-item clearfix"style="height: 60px">
+                         <span class="pull-left thumb-sm avatar m-r">
+                            <img src="img/a4.jpg" alt="...">
+                         </span>
+                         <span class="clear pull-left modal-sm">
+                            <span>
+                              <a href="#" class="text-info font-bold">哇噶<i class="icon-twitter"></i></a>
+                            </span>
+                            <small class="text-muted clear text-ellipsis" >一款新型的基于P2SP技术的下载软件</small>
+                         </span>
+
+                         <span class="clear pull-left col-sm-3">
+                            <span>
+                              <a  class=" text-info col-lg-offset-2 fa fa-arrow-down"><a></a>50.2MB</a>
+                            </span>
+                            <br>
+                            <a  class="text-warning-dker col-lg-offset-2 fa fa-arrow-up"><a></a>50.2MB</i></a>
+                         </span>
+
+                          <span class="clear pull-left  m-t-sm ">
+                            <span>
+                              <a href="#" class="text-info m-l-xxl">6台<i class="icon-twitter"></i></a>
+                          </span>
+
+                         </span>
+
+                        <div class="pull-right m-t-sm" style="margin-top: 4px">
+                            <a class="open dropdown-toggle btn-default btn-sm  padder m-b-xs" >控量</a>
+                            <a class="btn-info btn-sm  padder m-b-xs" >禁用</a>
+                        </div>
+                  </li>
+
+                  <li class="list-group-item clearfix" style="height:60px">
+                         <span class="pull-left thumb-sm avatar m-r">
+                            <img src="img/a4.jpg" alt="...">
+                         </span>
+                         <span class="clear pull-left modal-sm">
+                            <span>
+                              <a href="#" class="text-info font-bold">BT<i class="icon-twitter"></i></a>
+                            </span>
+                            <small class="text-muted clear text-ellipsis" >一款新型的基于P2SP技术的下载软件</small>
+                         </span>
+
+                         <span class="clear pull-left col-sm-3">
+                            <span>
+                              <a  class=" text-info col-lg-offset-2 fa fa-arrow-down"><a></a>50.2MB</a>
+                            </span>
+                            <br>
+                            <a  class="text-warning-dker col-lg-offset-2 fa fa-arrow-up"><a></a>50.2MB</i></a>
+                         </span>
+
+                          <span class="clear pull-left  m-t-sm ">
+                            <span>
+                              <a href="#" class="text-info m-l-xxl">3台<i class="icon-twitter"></i></a>
+                          </span>
+
+                         </span>
+
+                        <div class="pull-right m-t-sm" style="margin-top: 4px">
+                            <a class="open dropdown-toggle btn-default btn-sm  padder m-b-xs" >控量</a>
+                            <a class="btn-info btn-sm  padder m-b-xs" >禁用</a>
+                        </div>
+                  </li>
+
+                  <li class="list-group-item clearfix" style="height: 60px">
+                         <span class="pull-left thumb-sm avatar m-r">
+                            <img src="img/a4.jpg" alt="...">
+                         </span>
+                         <span class="clear pull-left modal-sm">
+                            <span>
+                              <a href="#" class="text-info font-bold">超级旋风<i class="icon-twitter"></i></a>
+                            </span>
+                            <small class="text-muted clear text-ellipsis" >一款新型的基于P2SP技术的下载软件</small>
+                         </span>
+
+                         <span class="clear pull-left col-sm-3">
+                            <span>
+                              <a  class=" text-info col-lg-offset-2 fa fa-arrow-down"><a></a>50.2MB</a>
+                            </span>
+                            <br>
+                            <a  class="text-warning-dker col-lg-offset-2 fa fa-arrow-up"><a></a>50.2MB</i></a>
+                         </span>
+
+                          <span class="clear pull-left  m-t-sm ">
+                            <span>
+                              <a href="#" class="text-info m-l-xxl">2台<i class="icon-twitter"></i></a>
+                          </span>
+
+                         </span>
+
+                        <div class="pull-right m-t-sm" style="margin-top: 4px">
+                            <a class="open dropdown-toggle btn-default btn-sm  padder m-b-xs" >控量</a>
+                            <a class="btn-info btn-sm  padder m-b-xs" >禁用</a>
+                        </div>
+                  </li>
+
+                  <li class="list-group-item clearfix" style="height: 60px">
+                         <span class="pull-left thumb-sm avatar m-r">
+                            <img src="img/a4.jpg" alt="...">
+                         </span>
+                         <span class="clear pull-left modal-sm">
+                            <span>
+                              <a href="#" class="text-info font-bold">金蝴蝶软件<i class="icon-twitter"></i></a>
+                            </span>
+                            <small class="text-muted clear text-ellipsis" >一款新型的基于P2SP技术的下载软件</small>
+                         </span>
+
+                         <span class="clear pull-left col-sm-3">
+                            <span>
+                              <a  class=" text-info col-lg-offset-2 fa fa-arrow-down"><a></a>50.2MB</a>
+                            </span>
+                            <br>
+                            <a  class="text-warning-dker col-lg-offset-2 fa fa-arrow-up"><a></a>50.2MB</i></a>
+                         </span>
+
+                          <span class="clear pull-left  m-t-sm ">
+                            <span>
+                              <a href="#" class="text-info m-l-xxl">1台<i class="icon-twitter"></i></a>
+                          </span>
+
+                         </span>
+
+                        <div class="pull-right m-t-sm" style="margin-top: 4px">
+                            <a class="open dropdown-toggle btn-default btn-sm  padder m-b-xs" >控量</a>
+                            <a class="btn-info btn-sm  padder m-b-xs" >禁用</a>
+                        </div>
+                  </li>
+
+                  <li class="list-group-item clearfix" style="height: 60px">
+                         <span class="pull-left thumb-sm avatar m-r">
+                            <img src="img/a4.jpg" alt="...">
+                         </span>
+                         <span class="clear pull-left modal-sm">
+                            <span>
+                              <a href="#" class="text-info font-bold">纳客软件<i class="icon-twitter"></i></a>
+                            </span>
+                            <small class="text-muted clear text-ellipsis" >一款新型的基于P2SP技术的下载软件</small>
+                         </span>
+
+                         <span class="clear pull-left col-sm-3">
+                            <span>
+                              <a  class=" text-info col-lg-offset-2 fa fa-arrow-down"><a></a>50.2MB</a>
+                            </span>
+                            <br>
+                            <a  class="text-warning-dker col-lg-offset-2 fa fa-arrow-up"><a></a>50.2MB</i></a>
+                         </span>
+
+                          <span class="clear pull-left  m-t-sm ">
+                            <span>
+                              <a href="#" class="text-info m-l-xxl">1台<i class="icon-twitter"></i></a>
+                          </span>
+
+                         </span>
+
+                        <div class="pull-right m-t-sm" style="margin-top: 4px">
+                            <a class="open dropdown-toggle btn-default btn-sm  padder m-b-xs" >控量</a>
+                            <a class="btn-info btn-sm  padder m-b-xs" >禁用</a>
+                        </div>
+                  </li>
+
+                  <li class="list-group-item clearfix" style="height: 60px">
+                         <span class="pull-left thumb-sm avatar m-r">
+                            <img src="img/a4.jpg" alt="...">
+                         </span>
+                         <span class="clear pull-left modal-sm">
+                            <span>
+                              <a href="#" class="text-info font-bold">鸿玮软件<i class="icon-twitter"></i></a>
+                            </span>
+                            <small class="text-muted clear text-ellipsis" >一款新型的基于P2SP技术的下载软件</small>
+                         </span>
+
+                         <span class="clear pull-left col-sm-3">
+                            <span>
+                              <a  class=" text-info col-lg-offset-2 fa fa-arrow-down"><a></a>50.2MB</a>
+                            </span>
+                            <br>
+                            <a  class="text-warning-dker col-lg-offset-2 fa fa-arrow-up"><a></a>50.2MB</i></a>
+                         </span>
+
+                          <span class="clear pull-left  m-t-sm ">
+                            <span>
+                              <a href="#" class="text-info m-l-xxl">1台<i class="icon-twitter"></i></a>
+                          </span>
+
+                         </span>
+
+                        <div class="pull-right m-t-sm" style="margin-top: 4px">
+                            <a class="open dropdown-toggle btn-default btn-sm  padder m-b-xs" >控量</a>
+                            <a class="btn-info btn-sm  padder m-b-xs" >禁用</a>
+                        </div>
+                  </li>
+
+
+                </ul>
+              </div>
+
+            </div>
+          </div>
+          <div class="page" style="text-align: right; margin: 10px">
+            <a class=" wrapper-xs btn  btn-rounded page"  onclick="last()"> 上一页 </a>
+                     <span id="page" >
+                       <a  class="wrapper-xs btn-info btn-rounded"> 1</a>
+                       <a class="wrapper-xs btn  btn-rounded">2</a>
+                       <a  class="wrapper-xs btn  btn-rounded">3</a>
+                       <a class="wrapper-xs btn  btn-rounded">4</a>
+                       <a class="wrapper-xs btn  btn-rounded">5</a>
+                     </span>
+            <a class=" wrapper-xs btn  btn-rounded page"  onclick="next()"> 下一页 </a>
+          </div>
+        </div>
+      </div>
+    </div>
+
+
+  </div>
+
+</div>

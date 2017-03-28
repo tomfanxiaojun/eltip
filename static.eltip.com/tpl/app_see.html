@@ -1,0 +1,349 @@
+<div class="hbox hbox-auto-xs hbox-auto-sm" ng-init="
+    app.settings.asideFolded = false;
+    app.settings.asideDock = false; "
+     ng-controller="app"
+        >
+    <!-- main -->
+    <div class="col">
+        <!-- main header -->
+        <div class="bg-light lter b-b wrapper-md">
+            <div class="row">
+                <div class="col-sm-6 col-xs-12">
+
+                    <h1 class="m-n font-thin h3">第五周 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;周报详情</h1>
+                </div>
+            </div>
+        </div>
+        <!-- / main header -->
+        <div class="wrapper-md">
+
+            <div class="col-md-12">
+                <div class="row">
+                    <div class="col-md-4" >
+                        <div class="panel b-a">
+                            <div >
+                                <div  class="panel-heading bg-info dk no-border m-b-xs" >
+                                    <span class="h5 text-white">终端部署状态</span>
+                                </div>
+                                <div class="text-center m-t-lg "style="height: 281px" >
+                                    <p class=" h1 text-info " style="margin-top: 100px">55</p>
+                                    <small class=" "  style="margin-top: 2px">已部署(个)</small>
+                                </div>
+                            </div>
+                       
+                        </div>
+                    </div>
+
+                    <div class="col-md-8">
+                        <div class="panel b-a">
+                            <!--折线图-->
+                            <div  class="panel-heading bg-white dk lt" >
+                                <line id="mainLine" legend="legend" item="item" data="data" style=" width:101% " ></line>
+                            </div>
+                            <!--end折线图-->
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-12">
+                <div class="row">
+
+
+                    <div class="col-md-6">
+                        <div class="panel b-a">
+                          <div>
+
+                            <div  class="panel-heading bg-info dk no-border m-b-xs" >
+                                <span class="h5 text-white">软件时间统计</span>
+                            </div>
+                            <div   class="text-center  ">
+                                <twopies id="mn" legend="legend" item="item" data="data" style=" width:101% " ></twopies>
+                            </div>
+                          </div>
+
+                        </div>
+                    </div>
+
+                    <div class="col-md-6" >
+                        <div class="panel b-a">
+                            <div >
+                                <div  class="panel-heading bg-info dk no-border m-b-xs" >
+                                    <span class="h5 text-white">软件流量统计</span>
+                                </div>
+                                <div class="text-center  " >
+                                    <twopiess id="mns" legend="legend" item="item" data="data" style=" width:101% " ></twopiess>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-12">
+                <div class="row">
+
+
+                    <div class="col-md-6">
+                        <div class="panel b-a">
+
+                            <div>
+
+                                <div  class="panel-heading bg-info dk no-border m-b-xs" >
+                                    <span class="h5 text-white">网页统计</span>
+                                </div>
+                                <div   class="text-center  ">
+                                    <webcountpies id="maaa" legend="legend" item="item" data="data" style=" width:101% " ></webcountpies>
+                                </div>
+                            </div>
+
+
+                        </div>
+                    </div>
+
+                    <div class="col-md-6" >
+                        <div class="panel b-a">
+                            <div >
+                                <div  class="panel-heading bg-info dk no-border m-b-xs" >
+                                    <span class="h5 text-white">网页拦截排名</span>
+                                </div>
+                                <div class="text-center  " >
+                                    <ul class="list-group list-group-lg m-b-none" >
+                                        <li class="list-group-item clearfix " style="height: 80px">
+                                            <div class="pull-left" >
+
+                                                <span  class="text-danger font-bold fa-2x m-r ">1</span>
+                                            </div>
+
+
+                                            <span class="pull-left thumb-sm avatar m-r ">
+                                                <img src="img/ie1.jpg" >
+                                             </span>
+                                             <span class=" pull-left  m-l-n-md ">
+
+                                                  <a class=" clear font-bold m-t-xxs " style="text-align: left">经典文集</a>
+
+                                                  <small class="text-muted  text-ellipsis m-t-n-xs" style="text-align: left">http://www.majieshuhui.com/</small>
+                                             </span>
+
+                                            <div class=" pull-right " >
+
+                                                <div   class=" pull-left "  >
+
+                                                    <span class="pull-right "  >访问次数：</span>
+
+                                                </div>
+
+                                                <div class="pull-left" >
+
+                                                    <span >30次</span>
+                                                </div>
+
+
+                                            </div>
+
+
+                                        </li>
+
+                                        <li class="list-group-item clearfix " style="height: 80px">
+                                            <div class="pull-left" >
+
+                                                <span  class="text-warning font-bold fa-2x m-r ">2</span>
+                                            </div>
+
+
+                                            <span class="pull-left thumb-sm avatar m-r ">
+                                                <img src="img/ie1.jpg" >
+                                             </span>
+                                             <span class=" pull-left  m-l-n-md ">
+
+                                                  <a class=" clear font-bold m-t-xxs " style="text-align: left">经典文集</a>
+
+                                                  <small class="text-muted  text-ellipsis m-t-n-xs" style="text-align: left">http://www.majieshuhui.com/</small>
+                                             </span>
+
+                                            <div class=" pull-right " >
+
+                                                <div   class=" pull-left "  >
+
+                                                    <span class="pull-right "  >访问次数：</span>
+
+                                                </div>
+
+                                                <div class="pull-left" >
+
+                                                    <span >20次</span>
+                                                </div>
+
+
+                                            </div>
+
+
+                                        </li>
+
+
+                                        <li class="list-group-item clearfix " style="height: 80px">
+                                            <div class="pull-left" >
+
+                                                <span  class="text-primary font-bold fa-2x m-r ">3</span>
+                                            </div>
+
+
+                                            <span class="pull-left thumb-sm avatar m-r ">
+                                                <img src="img/ie1.jpg" >
+                                             </span>
+                                             <span class=" pull-left  m-l-n-md ">
+
+                                                  <a class=" clear font-bold m-t-xxs " style="text-align: left">经典文集</a>
+
+                                                  <small class="text-muted  text-ellipsis m-t-n-xs" style="text-align: left">http://www.majieshuhui.com/</small>
+                                             </span>
+
+                                            <div class=" pull-right " >
+
+                                                <div   class=" pull-left "  >
+
+                                                    <span class="pull-right "  >访问次数：</span>
+
+                                                </div>
+
+                                                <div class="pull-left" >
+
+                                                    <span >10次</span>
+                                                </div>
+
+
+                                            </div>
+
+
+                                        </li>
+
+                                        <li class="list-group-item clearfix " style="height: 80px">
+                                            <div class="pull-left" >
+
+                                                <span  class=" text-info  font-bold fa-2x m-r ">4</span>
+                                            </div>
+
+
+                                            <span class="pull-left thumb-sm avatar m-r ">
+                                                <img src="img/ie1.jpg" >
+                                             </span>
+                                             <span class=" pull-left  m-l-n-md ">
+
+                                                  <a class=" clear font-bold m-t-xxs " style="text-align: left">经典文集</a>
+
+                                                  <small class="text-muted  text-ellipsis m-t-n-xs" style="text-align: left">http://www.majieshuhui.com/</small>
+                                             </span>
+
+                                            <div class=" pull-right " >
+
+                                                <div   class=" pull-left "  >
+
+                                                    <span class="pull-right "  >访问次数：</span>
+
+                                                </div>
+
+                                                <div class="pull-left" >
+
+                                                    <span >5次</span>
+                                                </div>
+
+
+                                            </div>
+
+
+                                        </li>
+                                        <li class="list-group-item clearfix " style="height: 80px">
+                                            <div class="pull-left" >
+
+                                                <span  class="text-success font-bold fa-2x m-r ">5</span>
+                                            </div>
+
+
+                                            <span class="pull-left thumb-sm avatar m-r ">
+                                                <img src="img/ie1.jpg" >
+                                             </span>
+                                             <span class=" pull-left  m-l-n-md ">
+
+                                                  <a class=" clear font-bold m-t-xxs " style="text-align: left">经典文集</a>
+
+                                                  <small class="text-muted  text-ellipsis m-t-n-xs" style="text-align: left">http://www.majieshuhui.com/</small>
+                                             </span>
+
+                                            <div class=" pull-right " >
+
+                                                <div   class=" pull-left "  >
+
+                                                    <span class="pull-right "  >访问次数：</span>
+
+                                                </div>
+
+                                                <div class="pull-left" >
+
+                                                    <span >1次</span>
+                                                </div>
+
+
+                                            </div>
+
+
+                                        </li>
+
+
+
+                                    </ul>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+
+            <div class="col-md-12">
+                <div class="row">
+
+
+                    <div class="col-md-12">
+                        <div class="panel b-a">
+
+                            <div>
+
+                                <div  class="panel-heading bg-info dk no-border m-b-xs" >
+                                    <span class="h5 text-white">硬件统计</span>
+                                </div>
+                                <div   class="text-center  ">
+                                    <hardwarepies id="maa" legend="legend" item="item" data="data" style=" width:101% " ></hardwarepies>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+ 
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

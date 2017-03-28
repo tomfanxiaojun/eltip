@@ -1,0 +1,220 @@
+<div class="test-paper">
+    <style type="text/css">
+        .test-paper {
+            width: 800px;
+            margin: 0 auto;
+            text-align: center;
+            margin-bottom: 40px;
+        }
+
+        .paper-header {
+            background: #f3f3f3;
+            border: 1px solid #dfdfdf;
+        }
+
+        h1,
+        h2 {
+            margin: 0;
+        }
+
+        .paper-title {
+            line-height: 58px;
+        }
+
+        .paper-detail-header {
+            font-size: 24px;
+            background: #e2e1e1;
+            line-height: 38px;
+        }
+
+        .paper-detail-header-detail {
+            line-height: 36px;
+        }
+
+        .paper-detail-header-detail-desc {
+            font-weight: bold;
+        }
+
+        .paper-body {
+            margin-top: 20px;
+            border: 1px solid #dfdfdf;
+            margin-bottom: 20px;
+        }
+
+        .paper-type-title {
+            line-height: 32px;
+            background: rgba(0, 0, 0, .075);
+            text-align: left;
+            font-weight: bold;
+            padding-left: 10px;
+        }
+
+        .paper-type-info {
+            line-height: 32px;
+            background: rgba(0, 0, 0, .05);
+            text-align: left;
+            padding-left: 10px;
+            border-top: 1px solid #dfdfdf;
+            border-bottom: 1px solid #dfdfdf;
+            font-size: 12px;
+        }
+
+        .paper-type-questions {
+            list-style: none;
+            text-align: left;
+            padding-left: 0;
+            padding-top: 10px;
+        }
+
+        .question-num {
+            color: #FFFFFF;
+            display: inline-block;
+            width: 20px;
+            height: 20px;
+            border-radius: 50%;
+            background: #da149c;
+            line-height: 20px;
+            text-align: center;
+            margin-left: -18px;
+            margin-right: 10px;
+        }
+
+        .question-option-container {
+            margin-top: 10px;
+            margin-left: 10px;
+        }
+
+        .paper-type-questions-item {
+            margin-left: 28px;
+            margin-right: 28px;
+            padding-bottom: 10px;
+            margin-top: 10px;
+        }
+
+        .paper-type-questions-item:not(:last-child) {
+            border-bottom: 1px solid #dfdfdf;
+        }
+
+        .question-option {
+            margin-right: 10px !important;
+        }
+
+        .question-option-choice {
+            margin-right: 100px;
+        }
+
+        .paper-submit {
+            width: 80px;
+            height: 32px;
+            line-height: 32px;
+            background: #da149c;
+            color: white;
+            cursor: pointer;
+            margin: 0 auto;
+            display: inline-block;
+        }
+        .inputs{
+            line-height: 38px;
+            padding-left:6px;
+        }
+        .input-text{
+            line-height: 22px;
+            margin-left:6px;
+            margin-right:6px;
+        }
+    </style>
+    <div class='paper-header'>
+        <h1 class="paper-title">
+            {{currentPaper.title}}
+        </h1>
+        <div class="paper-detail">
+            <h2 class='paper-detail-header'>试卷信息</h2>
+            <div class="paper-detail-header-detail">
+                <span class='paper-detail-header-detail-desc'>总分</span>:{{currentPaper.qTotalScore}}
+                <span class='paper-detail-header-detail-desc'> 及格</span>:{{currentPaper.passScore}}
+                <span class='paper-detail-header-detail-desc'> 题量</span>：{{currentPaper.qCount}}
+            </div>
+        </div>
+    </div>
+    <div class="paper-body">
+        <div ng-repeat="item in currentPaper.items">
+            <div class="paper-type" ng-show="item.type.type===1">
+                <div class="paper-type-title">
+                   {{item.type.name}}
+                </div>
+                <div class="paper-type-info">
+                    <span>数量({{item.qitemsCount}})</span> <span>分数({{item.qscore}})</span> <span>总分({{item.qitemsTotalScore}})</span>
+                </div>
+                <ul class="paper-type-questions">
+                    <li class="paper-type-questions-item" ng-repeat="q in item.qitems  track by $index">
+                        <div class="question-title"><span class='question-num'>{{$index+1}}</span>{{q.title}}</div>
+                        <div ng-repeat='qi in q.questionItems' class='question-option-container'>
+                            <input type="radio" ng-value="qi.id" ng-model="q.id" class='question-option'>{{qi.name}}
+                        </div>
+                    </li>
+                </ul>
+            </div>
+            <div class="paper-type" ng-show="item.type.type===2">
+                <div class="paper-type-title">
+                    {{item.type.name}}
+                </div>
+                <div class="paper-type-info">
+                    <span>数量({{item.qitemsCount}})</span> <span>分数({{item.qscore}})</span> <span>总分({{item.qitemsTotalScore}})</span>
+                </div>
+                <ul class="paper-type-questions">
+                    <li class="paper-type-questions-item" ng-repeat="q in item.qitems  track by $index">
+                        <div class="question-title"><span class='question-num'>{{$index+1}}</span>{{q.title}}</div>
+                        <div ng-repeat='qi in q.questionItems' class='question-option-container'>
+                            <input type="checkbox" ng-model="qi.id" ng-true-value="1" ng-false-value="0" class='question-option'>{{qi.name}}
+                        </div>
+                    </li>
+                </ul>
+            </div>
+            <div class="paper-type" ng-show="item.type.type===3">
+                <div class="paper-type-title">
+                    {{item.type.name}}
+                </div>
+                <div class="paper-type-info">
+                    <span>数量({{item.qitemsCount}})</span> <span>分数({{item.qscore}})</span> <span>总分({{item.qitemsTotalScore}})</span>
+                </div>
+                <ul class="paper-type-questions">
+                    <li class="paper-type-questions-item" ng-repeat="q in item.qitems  track by $index">
+                        <div class="question-title"><span class='question-num'>{{$index+1}}</span>{{q.title}}</div>
+                        <div ng-repeat='qi in q.questionItems' class='question-option-container'>
+                            <input type="radio" ng-model="qi.id"  class='question-option'>{{qi.name}}
+                        </div>
+                    </li>
+                </ul>
+            </div>
+            <div class="paper-type" ng-show="item.type.type===4">
+                <div class="paper-type-title">
+                    {{item.type.name}}
+                </div>
+                <div class="paper-type-info">
+                    <span>数量({{item.qitemsCount}})</span> <span>分数({{item.qscore}})</span> <span>总分({{item.qitemsTotalScore}})</span>
+                </div>
+                <ul class="paper-type-questions">
+                    <li class="paper-type-questions-item"  ng-repeat="q in item.qitems  track by $index">
+                        <div class='inputs'>
+                            <span class='question-num'>{{$index+1}}</span>
+                        <span ng-repeat='o in q.options track by $index'>
+               			 {{o}}
+			                <span ng-if='$index!=options.length-1'>
+			                    <input type="text" name="" ng-model='optionsResult[$index]' class="input-text">
+			                </span>
+                        </span>
+                        </div>
+                    </li>
+
+                </ul>
+            </div>
+        </div>
+
+    </div>
+    <!--<div class="paper-submit">-->
+        <!--提交-->
+    <!--</div>-->
+    <div class="paper-submit" ng-click="goBack()">
+        返回
+    </div>
+</div>

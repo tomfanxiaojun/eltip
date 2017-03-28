@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.system.mapping.QuestionItemDao">
+	<resultMap type="QuestionItem" id="items">
+		<result column="Id" property="id" />
+		<result column="questionId" property="questionId" />
+		<result column="name" property="name" jdbcType="VARCHAR"
+			javaType="String"/>
+		<result column="IsTure" property="isTure" />
+		
+	</resultMap>
+ 	<insert id="addItems"  parameterType="java.util.List">
+		insert into T_QuestionItem (
+		QuestionId,Name,IsTure,value)
+		values
+         <foreach item="item" index="key" collection="list"    
+            open="" separator="," close="">	
+        (
+		#{item.questionId},
+		#{item.name},
+		#{item.isTure},
+		#{item.value}
+		)
+         </foreach> 
+	
+	</insert>
+	<select id="findQuestionItems" resultMap="items" parameterType="java.util.List">
+		select * from t_questionitem where QuestionId in 
+		<foreach item="id" index="index" collection="list" 
+			open="(" separator="," close=")">
+			#{id}
+		</foreach>
+	</select>
+	<update id="deleteById" parameterType="int">
+		delete from  t_questionitem  where id=#{id}		
+	</update>
+	<update id="update" parameterType="questionItem">
+		update  t_questionitem set Name=#{name},IsTure=#{isTure},value=#{value} where id =#{id}
+	</update>
+</mapper> 

@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.system.mapping.RoleDao">
+	<resultMap type="role" id="role1">
+		<result column="id" property="id" />
+		<result column="role_name" property="roleName" jdbcType="VARCHAR"
+			javaType="String" />
+		<result column="function_code" property="functionCode" jdbcType="VARCHAR"
+			javaType="String" />
+		<result column="status" property="status"/>
+		<result column="ts" property="ts" jdbcType="TIMESTAMP"
+			javaType="java.util.Date" />
+	</resultMap>
+	
+	<insert id="addRole" parameterType="role">
+		insert into tb_role (
+		status
+		<if test="roleName!=null">, role_name</if>
+		<if test="functionCode!=null">, function_code</if>
+		)
+		values
+		(
+		1
+		<if test="roleName!=null">, #{roleName}</if>
+		<if test="functionCode!=null">, #{functionCode}</if>
+		)
+	</insert>
+	
+	<update id="updataRole" parameterType="role">
+		update tb_role
+		<set>
+			status=1
+			<if test="functionCode!=null">,function_code=#{functionCode}</if>
+			<if test="roleName!=null">,role_name=#{roleName}</if>
+		</set>
+		where id=#{id}
+	</update>
+	
+	<update id="deleteById" parameterType="int">
+		update tb_role set status
+		= 0 where id=#{id}
+	</update>
+	
+	<select id="findRole" resultMap="role1" parameterType="role">
+		select * from tb_role
+		<where>
+			status = 1
+			<if test="id!=null">and id=#{id}</if>
+			<if test="functionCode!=null">and function_code=#{functionCode}</if>
+			<if test="roleName!=null">and role_name=#{roleName}</if>
+		</where>
+	</select>
+	
+	<select id="findRoles" resultMap="role1" parameterType="java.util.List">
+		select id,role_name,function_code from tb_role where status = 1 
+		and id in 
+		<foreach item="id" index="index" collection="list" 
+			open="(" separator="," close=")">
+			#{id}
+		</foreach>
+	</select>
+</mapper> 

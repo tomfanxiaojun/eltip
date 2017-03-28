@@ -1,0 +1,263 @@
+<div class="hbox hbox-auto-xs hbox-auto-sm" ng-init="
+    app.settings.asideFolded = false;
+    app.settings.asideDock = false; "
+     ng-controller="app"
+        >
+    <!-- main -->
+    <div class="col">
+        <!-- main header -->
+        <div class="bg-light lter b-b wrapper-md">
+            <div class="row">
+                <div class="col-sm-6 col-xs-12">
+                    <h4 class="m-n font-thin text-black">首页</h4>
+                </div>
+            </div>
+        </div>
+        <!-- / main header -->
+        <div class="wrapper-md">
+            <!-- stats -->
+            <div class="row">
+                <div class="col-md-5" style="background-color: transparent">
+                    <div class="row row-sm text-center wrapper-md">
+                        <div class="col-xs-6">
+                            <a href class="block panel padder-v bg-white-only item">
+                                <span class="text-dark font-thin h1 block">53</span>
+                                <span class="text-dark text-xs">今日拦截网页</span>
+                <span class="bottom text-right w-full">
+                  <i class="fa fa-cloud-upload text-muted m-r-sm"></i>
+                </span>
+                            </a>
+                        </div>
+                        <div class="col-xs-6">
+                            <a href class="block panel padder-v bg-white-only item">
+                                <span class="text-dark font-thin h1 block">1,053</span>
+                                <span class="text-dark text-xs">今日拦截软件</span>
+                <span class="bottom text-right w-full">
+                  <i class="fa fa-cloud-upload text-muted m-r-sm"></i>
+                </span>
+                            </a>
+                        </div>
+                        <div class="col-xs-6 ">
+                            <a href class="block panel padder-v bg-white-only item">
+                                <span class="text-dark font-thin h1 block">25%</span>
+                                <span class="text-dark text-xs">今日流量提速</span>
+                <span class="bottom text-right w-full">
+                  <i class="fa fa-cloud-upload text-muted m-r-sm"></i>
+                </span>
+                            </a>
+                        </div>
+                        <div class="col-xs-6">
+                            <div class="panel padder-v bg-success item">
+                                <div class="text-white font-thin h1">98</div>
+                                <span class="text-white text-xs">健康度</span>
+                                <div class="bottom text-left">
+                                    <i class="fa fa-caret-up text-warning m-l-sm"></i>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-xs-12 m-b-md">
+                            <div class="r bg-primary dker item hbox panel">
+                                <div class="col w-xs v-middle hidden-md">
+                                    <div ng-init="data1=[60,40]" ui-jq="sparkline" ui-options="{{data1}}, {type:'pie', height:40, sliceColors:['{{app.color.warning}}','#fff']}" class="sparkline inline"></div>
+                                </div>
+                                <div class="col dk padder-v r-r">
+                                    <div class="text-white font-normal h1"><span>12,670</span></div>
+                                    <span class="text-white text-xs">累计为您节约时间（小时）</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!--饼图-->
+                <div class="col-md-7" style="background-color: transparent">
+                    <div class="panel wrapper">
+
+                        <div class="text-center m-t-md">
+                            <pie id="mainPin" legend="legendPie" item="item" data="dataPie"></pie>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- <div class="row">
+                 <div class="col-md-14">
+                 <line id="mainLine" legend="legendLine" item="itemLine" data="dataLine"></line>
+                     </div >
+                 </div>-->
+        </div>
+    </div>
+    <!-- / main -->
+    <!-- right col -->
+    <div class="col w-md bg-white-only b-l bg-auto no-border-xs">
+        <tabset class="nav-tabs-alt" justified="true">
+            <tab>
+                <tab-heading>
+                    <i class="glyphicon  glyphicon-comment text-md text-muted wrapper-sm"></i>
+                </tab-heading>
+                <div class="panel">
+                    <div class="panel-heading bg-info text-white">
+                        支付管理
+                        <i class="pull-left fa fa-cny text-lg text-warning"></i>
+                        <i class="pull-right fa fa-angle-right text-md"></i>
+                    </div>
+                    <div class="wrapper">
+                        <div class="text-xs">
+                            <span class="m-r-lg">套餐类型：</span>
+                            <span class="text-danger m-r-md">免费版</span>
+                            <span class="btn btn-xs btn-rounded btn-success">查看</span>
+                        </div>
+                        <div class="text-xs m-t-lg m-b-lg">
+                            建议您升级至付费套餐，享受更多使用人数、无限使用空间、更多高效应用。
+                        </div>
+                    </div>
+                    <div class="text-center">
+                        <span href class="pos-rlt btn btn-sm btn-primary m-b w-sm text-lt" style="left:20px;">充值特惠</span>
+                        <span class="pos-rlt badge bg-danger pull-in" style="top:-22px;">5折优惠</span>
+                    </div>
+                </div>
+                <div class="panel">
+                    <div class="panel-heading bg-info text-white">
+                        本周违例 Top 5
+                        <i class="pull-right fa fa-angle-right text-md"></i>
+                    </div>
+                    <ul class="panel-body list-group no-bg no-borders pull-in">
+                        <li class="list-group-item">
+                            <a herf class="pull-left thumb-sm avatar m-r">
+                                <img src="img/a4.jpg" alt="..." class="img-circle">
+                                <i class="on b-white bottom"></i>
+                            </a>
+                            <div class="clear">
+                                <div><a href>耿忠尧</a></div>
+                                <small class="pull-left text-muted">总计：305次</small>
+                                <small class="pull-right text-muted">上升：<a class="text-danger-lt">50%</a></small>
+                            </div>
+                        </li>
+                        <li class="list-group-item">
+                            <a herf class="pull-left thumb-sm avatar m-r">
+                                <img src="img/a5.jpg" alt="..." class="img-circle">
+                                <i class="on b-white bottom"></i>
+                            </a>
+                            <div class="clear">
+                                <div><a href>谢信凯</a></div>
+                                <small class="pull-left text-muted">总计：53次</small>
+                                <small class="pull-right text-muted">上升：20%</small>
+                            </div>
+                        </li>
+                        <li class="list-group-item">
+                            <a herf class="pull-left thumb-sm avatar m-r">
+                                <img src="img/a6.jpg" alt="..." class="img-circle">
+                                <i class="busy b-white bottom"></i>
+                            </a>
+                            <div class="clear">
+                                <div><a href>尹思敏</a></div>
+                                <small class="pull-left text-muted">总计：18次</small>
+                                <small class="pull-right text-muted">下降：13%</small>
+                            </div>
+                        </li>
+                        <li class="list-group-item">
+                            <a herf class="pull-left thumb-sm avatar m-r">
+                                <img src="img/a7.jpg" alt="..." class="img-circle">
+                                <i class="away b-white bottom"></i>
+                            </a>
+                            <div class="clear">
+                                <div><a href>覃杰龙</a></div>
+                                <small class="pull-left text-muted">总计：12次</small>
+                                <small class="pull-right text-muted">上升：11%</small>
+                            </div>
+                        </li>
+                        <li class="list-group-item">
+                            <a herf class="pull-left thumb-sm avatar m-r">
+                                <img src="img/a8.jpg" alt="..." class="img-circle">
+                                <i class="away b-white bottom"></i>
+                            </a>
+                            <div class="clear">
+                                <div><a href>耿忠恒</a></div>
+                                <small class="pull-left text-muted">总计：6次</small>
+                                <small class="pull-right text-muted">下降：68%</small>
+                            </div>
+                        </li>
+                    </ul>
+                    <div class="text-center">
+                        <a href class="btn btn-sm btn-primary padder-md m-b">更多</a>
+                    </div>
+                </div>
+
+
+
+            </tab>
+            <tab>
+                <tab-heading>
+                    <i class="glyphicon glyphicon-th text-md text-muted wrapper-sm"></i>
+                </tab-heading>
+                <div class="wrapper-md">
+                    <div class="m-b-sm text-md">联系我们</div>
+                    <ul class="list-group no-borders pull-in auto">
+                        <li class="list-group-item">
+                            <button class="pull-left thumb-sm m-r btn btn-rounded btn-lg btn-icon btn-default"><i class="fa fa-qq text-info"></i></button>
+                            <div class="clear">
+                                <div><a href="">客服QQ</a></div>
+                                <small class="text-muted">512334480</small>
+                            </div>
+                        </li>
+                        <li class="list-group-item">
+                            <button class="pull-left thumb-sm m-r btn btn-rounded btn-lg btn-icon btn-default"><i class="fa fa-phone text-info"></i></button>
+                            <div class="clear">
+                                <div><a href="">400-097-9995</a></div>
+                                <small class="text-muted">全国免费电话</small>
+                            </div>
+                        </li>
+                    </ul>
+                    <div class="m-b-sm text-md">卫士宝典</div>
+                    <ul class="list-group no-borders pull-in auto">
+                        <li class="list-group-item">
+                            <button class="pull-left thumb-sm m-r btn btn-rounded btn-lg btn-icon btn-default"><i class="glyphicon glyphicon-book text-info-dk"></i></button>
+                            <label class="i-switch bg-info pull-right" ng-init="showSpline=true">
+                                <input type="checkbox" ng-model="showSpline">
+                                <i></i>
+                            </label>
+                            <div class="clear">
+                                <div><a href="">使用向导</a></div>
+                                <small class="text-muted">轻轻松松一学就会</small>
+                            </div>
+                        </li>
+                        <li class="list-group-item">
+                            <button class="pull-left thumb-sm m-r btn btn-rounded btn-lg btn-icon btn-default"><i class="fa fa-envelope text-info-dk"></i></button>
+                            <div class="clear">
+                                <div><a href="">意见反馈</a></div>
+                                <small class="text-muted">意见是我们前进动力</small>
+                            </div>
+                        </li>
+                        <li class="list-group-item">
+                            <button class="pull-left thumb-sm m-r btn btn-rounded btn-lg btn-icon btn-default"><i class="fa fa-mortar-board text-info-dk"></i></button>
+                            <div class="clear">
+                                <div><a href="">法律及隐私声明</a></div>
+                                <small class="text-muted">轻松了解，安全使用</small>
+                            </div>
+                        </li>
+                    </ul>
+                    <div class="m-b-sm text-md">关注我们</div>
+                    <ul class="list-group no-borders pull-in auto">
+                        <li class="list-group-item">
+                            <button class="pull-left thumb-sm m-r btn btn-rounded btn-lg btn-icon btn-default"><i class="fa fa-weixin text-success"></i></button>
+                            <div class="clear">
+                                <div><a href="">官方微信</a></div>
+                                <small class="text-muted">关注我们获取代金券</small>
+                            </div>
+                        </li>
+                        <li class="list-group-item">
+                            <button class="pull-left thumb-sm m-r btn btn-rounded btn-lg btn-icon btn-default"><i class="fa fa-weibo text-danger"></i></button>
+              <span class="clear">
+                <div><a href="">新浪微博</a></div>
+                <small class="text-muted">关注我们获取代金券</small>
+              </span>
+                        </li>
+                    </ul>
+                </div>
+            </tab>
+        </tabset>
+    </div>
+    <!-- / right col -->
+</div>
+
+
+

@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.system.mapping.TestPaperDao">
+	<resultMap type="testPaper" id="testpaper">
+		<result column="id" property="id" />
+		<result column="exprimentId" property="exprimentId" />
+		<result column="title" property="title" jdbcType="VARCHAR"
+			javaType="String"/>
+		<result column="passScore" property="passScore" />		
+	</resultMap>
+	<resultMap type="TesetPaperType" id="items">
+		<result column="id" property="id" />
+		<result column="pid" property="pid" />
+		<result column="type" property="type" />
+		<result column="count" property="count" />
+		<result column="score" property="score" />
+	</resultMap>
+	<select id="findTestPaper" resultMap="testpaper" parameterType="testPaper">
+		select * from t_test_paper where 1=1
+		<if test="id!=null">and id=#{id}</if>
+		<if test="title!=null">and title like concat(concat('%',#{title}),'%')</if>
+		<if test="exprimentId!=null">and exprimentId=#{exprimentId}</if>
+	</select>	
+	<select id="findTestPaperTypes" resultMap="items" parameterType="java.util.List">
+		select * from t_test_paper_type where pid in 
+		<foreach item="id" index="index" collection="list" 
+			open="(" separator="," close=")">
+			#{id}
+		</foreach>
+	</select>
+	<insert id="addTestPaper" parameterType="testPaper" useGeneratedKeys="true" keyProperty="id">
+	insert into t_test_paper (
+		exprimentId,title,passScore,testCount)
+		values
+		(
+		#{exprimentId},
+		#{title},
+		#{passScore},
+		#{testCount}
+		)		
+	</insert>
+	<insert id="addItems"  parameterType="java.util.List">
+		insert into t_test_paper_type (
+		pid,type,count,score)
+		values
+         <foreach item="item" index="key" collection="list"    
+            open="" separator="," close="">	
+        (
+		#{item.pid},
+		#{item.type},
+		#{item.count},
+		#{item.score}
+		)
+         </foreach> 
+	
+	</insert>
+	<update id="deleteItemByIds" parameterType="int">
+		delete from  t_test_paper_type  where id in
+				<foreach item="id" index="index" collection="list" 
+			open="(" separator="," close=")">
+			#{id}
+		</foreach>
+	</update>
+	<update id="deletePaperByIds" parameterType="int">
+		delete from  t_test_paper  where id in
+				<foreach item="id" index="index" collection="list" 
+			open="(" separator="," close=")">
+			#{id}
+		</foreach>
+	</update>
+	<update id="updateItem" parameterType="TesetPaperType">
+		update  t_test_paper_type set count=#{count},score=#{score} where id =#{id}
+	</update>
+	<update id="updatePaper" parameterType="TestPaper">
+		update  t_test_paper set title=#{title},passScore=#{passScore},testCount=#{testCount} where id =#{id}
+	</update>
+</mapper> 

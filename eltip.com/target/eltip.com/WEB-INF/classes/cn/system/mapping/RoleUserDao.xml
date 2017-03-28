@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.system.mapping.RoleUserDao">
+	<resultMap type="roleUser" id="ru1">
+		<result column="id" property="id" />
+		<result column="role_id" property="roleId" />
+		<result column="user_id" property="userId" />
+		<result column="status" property="status"/>
+		<result column="ts" property="ts" jdbcType="TIMESTAMP"
+			javaType="java.util.Date" />
+	</resultMap>
+	
+	<insert id="add" parameterType="roleUser">
+		insert into tb_user_role (role_id, user_id)
+		values
+		( #{roleId}, #{userId})
+	</insert>
+	
+	<update id="updata" parameterType="roleUser">
+		update tb_user_role
+		<set>
+			status=1
+			<if test="roleId!=null">,role_id=#{roleId}</if>
+			<if test="userId!=null">,user_id=#{userId}</if>
+		</set>
+		where id=#{id}
+	</update>
+	
+	<update id="deleteById" parameterType="int">
+		update tb_user_role set status = 0 where id=#{id}
+	</update>
+	
+	<select id="findById" resultMap="ru1" parameterType="int">
+		select * from tb_user_role
+		<where>
+			status = 1 and id=#{id}
+		</where>
+	</select>
+	
+	<select id="findByUserId" resultMap="ru1" parameterType="long">
+		select id,user_id,role_id,ts,status from tb_user_role
+		 where user_id = #{userId} and status = 1
+	</select>
+</mapper> 

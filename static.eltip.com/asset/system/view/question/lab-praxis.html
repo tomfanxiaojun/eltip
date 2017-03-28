@@ -1,0 +1,361 @@
+<style >
+    .div-relative{position:relative; color:#000;} /*position:relative  相对定位  ，元素，都是从顶点开始*/
+    .div-a{ position:absolute; left:0px; top:0px; }/* position:absolute 绝对定位 ，元素的位置由left  top控制*/
+    /* css注释说明： 背景为红色 */
+    .div-b{ position:absolute; left:0px; top:0px;  }
+    /* 背景为黄色 */
+    .div-c{ position:absolute; left:80px; top:80px;}
+
+    .w_h_all{
+        width: 100%;height: 100%
+    }
+
+    .transparent_class{
+        filter:alpha(opacity=20);
+        -moz-opacity:0.2;
+        -khtml-opacity: 0.2;
+        opacity: 0.2;
+    }
+
+    .active-answer,
+    .active-answer td{
+        background-color: #f2dede !important;
+    }
+
+
+    /* DIV背景颜色为蓝色 */
+</style>
+
+
+<script type="application/javascript">
+    $(document).ready(function(){
+        $("#page a").click(function(){
+            var a_items= $('#page a');
+            a_items.removeClass();
+            $(this).addClass("wrapper-xs btn-success btn-rounded");
+
+        });
+    });
+
+    function  last(){
+        var className='wrapper-xs btn-success btn-rounded';
+
+        var a_items= $('#page a');
+        var nextIndex=0;
+        for(var i=0;i<a_items.size();i++){
+            var  a_tag=a_items[i];
+            if(a_tag.className==className){
+                nextIndex=i-1;
+                break;
+            }
+        }
+        if(nextIndex<0){
+            nextIndex=a_items.size()-1;
+        }
+
+        a_items.removeClass();
+        $(a_items[nextIndex]).addClass(className);
+    }
+
+
+    function next(){
+        //选中的样式
+        var className='wrapper-xs btn-success btn-rounded';
+
+        //jqeruy里面的元素查找， 在id为page元素里面查找所有的 a标签，
+        var a_items= $('#page a');
+        //选中的下标
+        var nextIndex=0;
+        //循环所有的a标签
+        for(var i=0;i<a_items.size();i++){
+            var  a_tag=a_items[i];
+
+            //如果当前的a标签已经选中，下一页，则应该是当前下标+1
+            if(a_tag.className==className){
+                nextIndex=i+1;
+                break;
+            }
+        }
+        //如果下标超过了最大长度，则从0开始
+        if((nextIndex+1)>a_items.size()){
+            nextIndex=0;
+        }
+        //移除所有a标签上的样式
+        a_items.removeClass();
+        //根据下标，添加选中时的样式
+        $(a_items[nextIndex]).addClass(className);
+    }
+</script>
+
+<div class="hbox hbox-auto-xs hbox-auto-sm"
+     ng-controller="QuestionController" style="background: white;">
+    <div>
+        <div>
+            <div>
+                <div class="alert alert-danger" role="alert" ng-show="errorObj.error">
+                    <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
+                    <span class="sr-only">Error:</span>
+                   {{errorObj.msg}}
+                </div>
+                <div class="wrapper-md" ng-show="!add" >
+                    <div class="row"
+                         style="border: 1px solid rgb(214, 229, 246)">
+                        <div class="col-md-3">
+                            <tabset class="nav-tabs-alt"
+                                    justified="true">
+                                <tab>
+                                    <tab-heading><span>题目分类</span> </tab-heading>
+                                    <!-- 设备的树形-->
+                                    <!-- 设备的树形布局-->
+                                    <div class="wrapper-md" style="padding: 0px">
+                                        <div class="b-a bg-light dk r r-2x">
+                                            <ul experients-tree id="tree" zNodes="zNodes"  class="ztree bg-white" ng-model="selectNode"></ul>
+                                        </div>
+                                    </div>
+                                </tab>
+                            </tabset>
+                        </div>
+                        <!-- 下方右侧布局-->
+                        <div class="col-md-9" >
+                            <div class="row wrapper-sm">
+                                <div class="col-sm-3">
+                                    <div class="input-group">
+                                        <input type="text" class="input-sm form-control" placeholder="请输入查询的题目">
+          <span class="input-group-btn">
+            <button class="btn btn-sm btn-default" type="button">搜索</button>
+          </span>
+                                    </div>
+                                </div>
+                                <div class="col-sm-9">
+                                    <div class="pull-right">
+                                        <!--<button class="btn m-b-xs btn-sm btn-info btn-addon"><i class="fa fa-plus"></i>导入</button>-->
+                                        <button class="btn m-b-xs btn-sm btn-primary btn-addon" ng-click="onAdd()"><i class="fa fa-plus" ></i>新增</button>
+                                        <button class="btn m-b-xs btn-sm btn-warning btn-addon" ng-click="deleteQuestion()"><i class="fa fa-trash-o"></i>删除</button>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="table-responsive">
+                                <table class="table table-striped b-t b-light">
+                                    <thead>
+                                    <tr>
+                                        <th style="width:20px;">
+                                            <label class="i-checks m-b-none">
+                                                <input type="checkbox"><i></i>
+                                            </label>
+                                        </th>
+                                        <th>题目名称</th>
+                                        <th>类型</th>
+                                        <th>时间</th>
+                                        <th>操作</th>
+                                    </tr>
+                                    </thead>
+                                    <tbody>
+                                    <tr ng-repeat="q in questions">
+                                        <td><label class="i-checks m-b-none"><input type="checkbox" id={{q.id}} ng-click="choiceQuestion(q)"><i></i></label></td>
+                                        <td>{{q.title}}</td>
+                                        <td>{{q.questionType.name}}</td>
+                                        <td>2016-12-20</td>
+                                        <td>
+                                            <a href ng-click="view(q)"><i class="fa fa-file text-info text" tooltip="预览"></i></a>
+                                            <a href ng-click="edit(q)"><i class="fa fa-edit text-info text" tooltip="编辑"></i></a>
+                                        </td>
+                                    </tr>
+
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="page" style="text-align: right; margin: 10px">
+                        <a class=" wrapper-xs btn  btn-rounded page" style="color: #7266c6;" onclick="last()"> 上一页 </a>
+                         <span id="page" >
+                           <a  class="wrapper-xs btn-info btn-rounded">1</a>
+                           <a class="wrapper-xs btn  btn-rounded">2</a>
+                           <a  class="wrapper-xs btn  btn-rounded">3</a>
+                           <a class="wrapper-xs btn  btn-rounded">4</a>
+                           <a class="wrapper-xs btn  btn-rounded">5</a>
+                         </span>
+                        <a class=" wrapper-xs btn  btn-rounded page" style="color: #7266c6;" onclick="next()"> 下一页 </a>
+                    </div>
+                </div >
+                <div class="panel panel-primary" ng-show="add">
+                    <div class="panel-heading m-n font-thin h3">添加题目({{coourseName}}->{{exprimentName}})</div>
+                    <div class="panel-body">
+                        <form>
+                            <div class="form-group">
+                                <div class="radio-inline" ng-repeat="type in questionTypes">
+                                    <label>
+                                        <input type="radio" name="optionsRadios" ng-model="question.type" ng-value="type.id" ng-checked="type.checked" ng-disabled="question.id">
+                                        {{type.name}}
+                                    </label>
+                                </div>
+
+                            </div>
+                            <div class="form-group">
+                                <label for="exampleInputEmail1">题目名称</label>
+                                <input type="text" class="form-control" ng-model="question.title" placeholder="请输入一个题目名称">
+                            </div>
+                            <div class="form-group" ng-if="question.type==3">
+                                <div class="radio-inline">
+                                    <label>
+                                        <input type="radio" ng-model="opinion.id" ng-value="1">
+                                        正确
+                                    </label>
+                                </div>
+                                <div class="radio-inline">
+                                    <label>
+                                        <input type="radio"  ng-model="opinion.id" ng-value="0">
+                                        错误
+                                    </label>
+                                </div>
+                            </div>
+                            <div class="form-group" ng-if="question.type==4">
+                                <button type="submit" class="btn btn-default" ng-click="onAddOptions()">添加填空</button>
+                            </div>
+                            <div class="panel panel-warning"  ng-if="(question.type==4)">
+                                <div class="panel-body">
+                                    <form>
+                                        <div class="table-responsive">
+                                            <table class="table table-striped b-t b-light">
+                                                <thead>
+                                                <tr>
+                                                    <th>填空</th>
+                                                    <th>答案</th>
+                                                    <th>操作</th>
+                                                </tr>
+                                                </thead>
+                                                <tbody>
+                                                <tr ng-repeat="item in question.questionItems">
+                                                    <td>{{item.name}}</td>
+                                                    <td>
+                                                        <input type="text" ng-model="item.value">
+                                                    </td>
+                                                    <td>
+                                                        <a href ng-click="removeItem(item)"><i class="fa fa-check text-success text-active"></i><i class="fa fa-remove text-info text" tooltip="删除"></i></a>
+
+                                                    </td>
+                                                </tr>
+
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                    </form>
+                                </div>
+                            </div>
+
+                            <div class="panel panel-warning"  ng-if="(question.type==1 || question.type==2)">
+                                <div class="panel-heading m-n font-thin h4">添加选项</div>
+                                <div class="panel-body">
+                                    <form>
+                                        <div class="form-group">
+                                            <label>选项名称(回车添加下一个问题)</label>
+                                            <input type="text" class="form-control" ng-keyup="addItem($event)" placeholder="请输入一个题目名称,回车添加下一个问题" ng-model="item.name">
+                                        </div>
+                                        <div class="table-responsive">
+                                            <table class="table table-striped b-t b-light">
+                                                <thead>
+                                                <tr>
+                                                    <th>正确答案</th>
+                                                    <th>题目名称</th>
+                                                    <th>操作</th>
+                                                </tr>
+                                                </thead>
+                                                <tbody>
+                                                <tr ng-repeat="item in question.questionItems" ng-class={'active-answer':isActiveAnswer(item)}>
+                                                    <td ng-if="question.type==1">
+                                                        <input type="radio"  ng-model="questionResult.id"  ng-value="item.id?item.id:item.name">
+                                                    </td>
+                                                    <td ng-if="question.type==2">
+                                                        <input type="checkbox" ng-model="item.isTure"
+                                                               ng-checked="item.isTure" ng-true-value="1" ng-false-value="0">
+                                                    </td>
+                                                    <td>{{item.name}}</td>
+                                                    <td>
+                                                        <a href ng-click="removeItem(item)"><i class="fa fa-check text-success text-active"></i><i class="fa fa-remove text-info text" tooltip="删除"></i></a>
+                                                        <a href ng-click="editItem(item)"><i class="fa fa-check text-success text-active"></i><i class="fa fa-edit text-info text" tooltip="编辑"></i></a>
+                                                    </td>
+                                                </tr>
+
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                    </form>
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <button type="submit" class="btn btn-default" ng-click="addQuestion()">提交</button>
+                                <button type="submit" class="btn btn-default" ng-click="onCancel()">取消</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+    </div>
+
+</div>
+<script type="text/ng-template" id="viewQuestion.html" >
+    <style>
+        .inputs{
+            line-height: 38px;
+            padding-left:6px;
+        }
+        .input-text{
+            line-height: 22px;
+            margin-left:6px;
+            margin-right:6px;
+        }
+    </style>
+    <div class="modal-body wrapper-lg">
+        <!-- main -->
+        <div class="row">
+            <div class="panel">
+                <div class="panel-heading b-light" ng-if="question.type!=4">
+                    {{question.title}}
+                </div>
+                <div class="panel-heading b-light inputs" ng-if="question.type==4" >
+                  <span ng-repeat='o in question.inputs track by $index'>
+                {{o}}
+                <span ng-if='$index!=question.inputs.length-1'>
+                    <input type="text" name="" ng-model='optionsResult[$index]'  class="input-text">
+                </span>
+            </span>
+                </div>
+                <div class="panel-body" ng-if="question.type!=4">
+                    <div class="form-group">
+                        <div class="radio" ng-if="question.type==1||question.type==3" ng-repeat="item in question.questionItems">
+                            <label>
+                                <input type="radio" name="optionsRadios" >
+                                {{item.name}}
+                            </label>
+                        </div>
+                        <div class="checkbox" ng-if="question.type==2" ng-repeat="item in question.questionItems">
+                            <label>
+                                <input type="checkbox" name="optionsRadios" >
+                                {{item.name}}
+                            </label>
+                        </div>
+                    </div>
+                </div>
+                <div class="panel-body">
+                    <div class="panel-heading m-n font-thin h4">试题答案</div>
+                    <div class="form-group">
+                        <div class="radio" ng-if="question.type==4" ng-repeat="item in question.questionItems">
+                            <label>
+                               {{item.name}}:{{item.value}}
+                            </label>
+                        </div>
+                        <div class="radio" ng-if="question.type!=4" ng-repeat="item in question.questionItems">
+                            <label ng-if="item.isTure==1">
+                                {{item.name}}
+                            </label>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</script>
